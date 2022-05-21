@@ -2,14 +2,14 @@ package br.edu.ifpb.pweb2.sorte_io.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
+/* import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.TemporalType; */
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -21,15 +21,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "controladores")
+/* @Entity
+@Table(name = "controladores") */
 public class Controlador {
-    @Id
+    /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name             = "id_controlador")
+    @Column(name             = "id_controlador") */
     private Integer          id;
 
     @NotEmpty(message        = "Campo é obrigatório!")
@@ -39,9 +39,9 @@ public class Controlador {
     @CPF
     private String           cpf;
 
-    @Temporal(TemporalType.DATE)
+    /* @Temporal(TemporalType.DATE)
+    @Column(name            = "dt_nascimento") */
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Column(name            = "dt_nascimento")
     private Date            dtNascimento;
 
     @NotEmpty(message        = "Campo é obrigatório!")
