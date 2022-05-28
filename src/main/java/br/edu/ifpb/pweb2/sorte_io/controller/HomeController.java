@@ -13,4 +13,19 @@ public class HomeController {
 
         return model;
     }
+
+    
+    @RequestMapping("/login")
+    public ModelAndView login(ModelAndView model) {
+        model.setViewName("./auth/login");
+
+        return model;
+    }
+    
+    @RequestMapping("/formApostador")
+    public ModelAndView form(ModelAndView model) {
+        model.setViewName("./form/formApostador");
+
+        return model;
+    }
 }
