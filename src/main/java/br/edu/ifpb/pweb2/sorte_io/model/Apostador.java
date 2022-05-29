@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,17 +40,17 @@ public class Apostador {
     @NotEmpty(message        = "Campo é obrigatório!")
     private String           nome;
 
-    @NotEmpty(message        = "Campo é obrigatório!")
-    @CPF
+    @CPF(message             = "Digite um CPF válido")
     private String           cpf;
 
-    @Temporal(TemporalType.DATE)
     @Column(name             = "dt_nascimento")
     @DateTimeFormat(pattern  = "dd/MM/yyyy")
+    @NotNull(message         = "Campo é obrigatório")
+    @Past(message            = "Não pode ser uma data futura")
     private Date             dtNascimento;
 
     @NotEmpty(message        = "Campo é obrigatório!")
-    @Email
+    @Email(message           = "Digite um e-mail válido")
     private String           email;
 
     @NotEmpty(message        = "Campo é obrigatório!")
