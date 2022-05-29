@@ -27,7 +27,12 @@
                 <hr>
               </form>      
         </div>
-        <button th:href="@{form/formApostador}" class="btn btn-primary">Cadastrar-se</button>        
+        <div class="d-grid gap-2 col-2 mx-auto">
+          <button th:onclick="|window.location.href='@{/formApostador}'|" class="btn btn-primary">Cadastrar Apostador</button>
+            
+          <button th:onclick="|window.location.href='@{formControlador}'|" class="btn btn-secondary">Cadastrar Contolador</button>           
+  
+        </div>
     </div>
 </body>
 </html>
