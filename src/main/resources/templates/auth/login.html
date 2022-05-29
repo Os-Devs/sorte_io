@@ -16,11 +16,11 @@
         <div class="d-flex justify-content-center">
             <form>
                 <div class="md-3 mb-3">
-                  <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                  <label for="exampleInputEmail1" class="form-label">E-mail:</label>
                   <input type="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
                 <div class="md-4 mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Senha</label>
+                  <label for="exampleInputPassword1" class="form-label">Senha:</label>
                   <input type="password" required class="form-control" id="exampleInputPassword1">
                 </div>
                 <button type="submit" class="btn btn-success">Entrar</button>
@@ -28,10 +28,8 @@
               </form>      
         </div>
         <div class="d-grid gap-2 col-2 mx-auto">
-          <button th:onclick="|window.location.href='@{/formApostador}'|" class="btn btn-primary">Cadastrar Apostador</button>
-            
-          <button th:onclick="|window.location.href='@{formControlador}'|" class="btn btn-secondary">Cadastrar Contolador</button>           
-  
+          <a th:href="@{formApostador}" class="btn btn-primary">Cadastrar Apostador</a>          
+          <a th:href="@{formControlador}" class="btn btn-secondary">Cadastrar Controlador</a> 
         </div>
     </div>
 </body>
