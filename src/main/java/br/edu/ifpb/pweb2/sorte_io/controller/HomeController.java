@@ -21,19 +21,5 @@ public class HomeController {
 
         return model;
     }
-    
-    @RequestMapping("/formApostador")
-    public ModelAndView form(ModelAndView model) {
-        model.setViewName("./form/formApostador");
-
-        return model;
-    }
-
-    @RequestMapping("/formControlador")
-    public ModelAndView formControl(ModelAndView model) {
-        model.setViewName("./form/formControlador");
-
-        return model;
-    }
 
 }
