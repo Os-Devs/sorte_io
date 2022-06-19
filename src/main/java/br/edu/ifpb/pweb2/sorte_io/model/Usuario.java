@@ -1,38 +1,33 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
-/* import java.util.Date; */
-import java.util.List;
+import java.io.Serializable;
+import java.sql.Date;
 
-/* import javax.persistence.Column; */
 import javax.persistence.Entity;
-/* import javax.persistence.GeneratedValue;
+import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; */
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-/* import javax.validation.constraints.Email;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.format.annotation.DateTimeFormat; */
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
-@NoArgsConstructor
-@Entity
-@Table(name = "apostadores")
-public class Apostador extends Usuario {
-    /* @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name             = "id_apostador")
+public abstract class Usuario implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer          id;
 
     @NotEmpty(message        = "Campo é obrigatório!")
@@ -41,7 +36,6 @@ public class Apostador extends Usuario {
     @CPF(message             = "Digite um CPF válido")
     private String           cpf;
 
-    @Column(name             = "dt_nascimento")
     @DateTimeFormat(pattern  = "dd/MM/yyyy")
     @NotNull(message         = "Campo é obrigatório")
     @Past(message            = "Não pode ser uma data futura")
@@ -54,9 +48,5 @@ public class Apostador extends Usuario {
     @NotEmpty(message        = "Campo é obrigatório!")
     @Min(value               = 8 
         ,message             = "A senha precisa conter mais que 8 caracteres")
-    private String           senha; */
-
-    @OneToMany
-    @JoinColumn(name         = "id_aposta")
-    private List<Aposta>     apostas;
+    private String           senha;
 }

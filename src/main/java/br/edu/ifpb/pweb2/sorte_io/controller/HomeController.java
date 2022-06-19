@@ -13,7 +13,6 @@ public class HomeController {
 
         return model;
     }
-
     
     @RequestMapping("/login")
     public ModelAndView login(ModelAndView model) {

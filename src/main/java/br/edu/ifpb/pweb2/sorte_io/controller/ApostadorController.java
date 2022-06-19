@@ -6,20 +6,25 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Apostador;
+import br.edu.ifpb.pweb2.sorte_io.repository.RepositoryApostadores;
 
 @Controller
 @RequestMapping("/apostadores")
 public class ApostadorController {
 
+    @Autowired
+    RepositoryApostadores repositoryApostadores;
+
     @RequestMapping("/form")
     public ModelAndView getForm(Apostador apostador, ModelAndView model) {
         model.addObject("apostador", apostador);
-        model.setViewName("./form/formApostador");
+        model.setViewName("./apostador/formApostador");
 
         return model;
     }
@@ -28,11 +33,11 @@ public class ApostadorController {
     public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model,
                              RedirectAttributes flash) {
         if (validation.hasErrors()) {
-            model.setViewName("./form/formApostador");
-            return model;
+            model.setViewName("./apostador/formApostador");
         }
-
-        model.setViewName("/home");
+        else {
+            model.setViewName("/home");
+        }
 
         return model;
     }
