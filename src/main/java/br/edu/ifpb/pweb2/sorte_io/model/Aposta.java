@@ -1,6 +1,6 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -28,7 +28,7 @@ public class Aposta {
     private Integer          id;
 
     @ElementCollection
-    private List<Integer>   numSelecionados;
+    private Set<Integer>   numSelecionados;
 
     private int             quantUso;
 

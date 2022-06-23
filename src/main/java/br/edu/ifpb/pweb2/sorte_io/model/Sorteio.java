@@ -1,8 +1,10 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -12,11 +14,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Future;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,7 +38,6 @@ public class Sorteio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer          id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @Future(message         = "A realização precisa ser numa data futura")
     private Date            dtRealizacao;
@@ -52,49 +52,71 @@ public class Sorteio {
     @JoinColumn(name        = "id_controlador")
     private Controlador     criadoPor;
 
-    @OneToOne
-    @JoinColumn(name        = "id_apostador")
-    private Apostador       vencedor;
+    @OneToMany
+    @JoinColumn(name        = "id_aposta")
+    private List<Aposta>    apostas;
 
-    @ManyToMany
-    @JoinColumn(name        = "id_apostador")
-    private List<Apostador> participantes;
+    @Transient
+    private List<Aposta> vencedores;
+
+    @Transient
+    private Map<Integer, List<Aposta>> acertos;
 
     
     public void sortear() {
-        int i = 0;
+        Random gerador = new Random();
 
-        while (i < 10) {
-            if (this.numSorteados.size() < 10) {
-                this.testeDistinto();
-                i++;
-            }
+        while(this.numSorteados.size() < 6) {
+            int nSorteado = gerador.nextInt(1, 61);
+
+            this.numSorteados.add(nSorteado);
         }
     }
 
     public void sortear(Set<Integer> manual) {
         this.numSorteados = manual;
     }
+    
+    public void testarVencedores() {
+        List<Integer> transform = new ArrayList<>();
+        transform.addAll(this.numSorteados);
 
-    public int sortearN() {
-        Random gerador = new Random();
-        int    nSorte  = gerador.nextInt(1, 61);
+        for(Aposta aposta : this.apostas) {
+            int countAcertos = 0;
 
-        return nSorte;
-    }
+            for(int i = 0; i < transform.size(); i++) {
+                if(aposta.getNumSelecionados().contains(transform.get(i))) {
+                    countAcertos++;
+                }
+            }
 
-    public void testeDistinto() {
-        boolean teste    = false;
-        int     sorteado = this.sortearN();
-
-        for (int i = 0; i < this.numSorteados.size(); i++) {
-            if (this.numSorteados.contains(sorteado)) {
-                teste = true;
+            if(this.acertos.containsKey(countAcertos)) {
+                this.acertos.get(countAcertos).add(aposta);
+            }
+            else {
+                this.acertos.put(countAcertos, new ArrayList<Aposta>());
+                this.acertos.get(countAcertos).add(aposta);
             }
         }
+    }
 
-        if (!teste) {
-            this.numSorteados.add(sorteado);
+    public void vencedores() {
+        this.testarVencedores();
+
+        for (int i = 6; i >= 0; i--) {
+            if(this.acertos.containsKey(i)) {
+                this.vencedores.addAll(this.acertos.get(i));
+                break;
+            }
         }
     }
+
+    public void distribuirPremiacao() {
+        BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
+
+        for (Aposta aposta : this.vencedores) {
+            aposta.getApostador().setSaldo(aposta.getApostador().getSaldo().add(valor));
+        }
+    }
+    
 }
