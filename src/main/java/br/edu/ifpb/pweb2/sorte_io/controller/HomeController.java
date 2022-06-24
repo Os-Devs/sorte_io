@@ -6,19 +6,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-    
-    @RequestMapping("/home")
-    public ModelAndView home(ModelAndView model) {
-        model.setViewName("/home");
+	
+	@RequestMapping("/home")
+	public ModelAndView home(ModelAndView model) {
+		model.setViewName("/home");
 
-        return model;
-    }
-    
-    @RequestMapping("/login")
-    public ModelAndView login(ModelAndView model) {
-        model.setViewName("./auth/login");
+		return model;
+	}
+	
+	@RequestMapping("/login")
+	public ModelAndView login(ModelAndView model) {
+		model.setViewName("./auth/login");
 
-        return model;
-    }
+		return model;
+	}
 
 }

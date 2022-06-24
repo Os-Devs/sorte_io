@@ -18,10 +18,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "apostadores")
 public class Apostador extends Usuario {
-    
-    private BigDecimal saldo = BigDecimal.ZERO;
+	
+	private BigDecimal saldo = BigDecimal.ZERO;
 
-    @OneToMany
-    @JoinColumn(name         = "id_aposta")
-    private List<Aposta>     apostas;
+	@OneToMany
+	@JoinColumn(name         = "id_aposta")
+	private List<Aposta>     apostas;
 }

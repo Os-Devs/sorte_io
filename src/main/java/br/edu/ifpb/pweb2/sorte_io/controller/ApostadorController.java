@@ -18,27 +18,27 @@ import br.edu.ifpb.pweb2.sorte_io.repository.RepositoryApostadores;
 @RequestMapping("/apostadores")
 public class ApostadorController {
 
-    @Autowired
-    RepositoryApostadores repositoryApostadores;
+	@Autowired
+	RepositoryApostadores repositoryApostadores;
 
-    @RequestMapping("/form")
-    public ModelAndView getForm(Apostador apostador, ModelAndView model) {
-        model.addObject("apostador", apostador);
-        model.setViewName("./apostador/formApostador");
+	@RequestMapping("/form")
+	public ModelAndView getForm(Apostador apostador, ModelAndView model) {
+		model.addObject("apostador", apostador);
+		model.setViewName("./apostador/formApostador");
 
-        return model;
-    }
+		return model;
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model,
-                             RedirectAttributes flash) {
-        if (validation.hasErrors()) {
-            model.setViewName("./apostador/formApostador");
-        }
-        else {
-            model.setViewName("/home");
-        }
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model,
+							 RedirectAttributes flash) {
+		if (validation.hasErrors()) {
+			model.setViewName("./apostador/formApostador");
+		}
+		else {
+			model.setViewName("/home");
+		}
 
-        return model;
-    }
+		return model;
+	}
 }

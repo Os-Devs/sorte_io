@@ -34,89 +34,89 @@ import lombok.Setter;
 @Entity
 @Table(name = "sorteios")
 public class Sorteio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer          id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer          id;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-    @Future(message         = "A realização precisa ser numa data futura")
-    private Date            dtRealizacao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Future(message         = "A realização precisa ser numa data futura")
+	private Date            dtRealizacao;
 
-    @ElementCollection
-    private Set<Integer>   numSorteados;
+	@ElementCollection
+	private Set<Integer>   numSorteados;
 
-    @NumberFormat(pattern   = "###.###,##")
-    private BigDecimal      valPremiacao;
+	@NumberFormat(pattern   = "###.###,##")
+	private BigDecimal      valPremiacao;
 
-    @OneToOne
-    @JoinColumn(name        = "id_controlador")
-    private Controlador     criadoPor;
+	@OneToOne
+	@JoinColumn(name        = "id_controlador")
+	private Controlador     criadoPor;
 
-    @OneToMany
-    @JoinColumn(name        = "id_aposta")
-    private List<Aposta>    apostas;
+	@OneToMany
+	@JoinColumn(name        = "id_aposta")
+	private List<Aposta>    apostas;
 
-    @Transient
-    private List<Aposta> vencedores;
+	@Transient
+	private List<Aposta> vencedores;
 
-    @Transient
-    private Map<Integer, List<Aposta>> acertos;
+	@Transient
+	private Map<Integer, List<Aposta>> acertos;
 
-    
-    public void sortear() {
-        Random gerador = new Random();
+	
+	public void sortear() {
+		Random gerador = new Random();
 
-        while(this.numSorteados.size() < 6) {
-            int nSorteado = gerador.nextInt(1, 61);
+		while(this.numSorteados.size() < 6) {
+			int nSorteado = gerador.nextInt(1, 61);
 
-            this.numSorteados.add(nSorteado);
-        }
-    }
+			this.numSorteados.add(nSorteado);
+		}
+	}
 
-    public void sortear(Set<Integer> manual) {
-        this.numSorteados = manual;
-    }
-    
-    public void testarVencedores() {
-        List<Integer> transform = new ArrayList<>();
-        transform.addAll(this.numSorteados);
+	public void sortear(Set<Integer> manual) {
+		this.numSorteados = manual;
+	}
+	
+	public void testarVencedores() {
+		List<Integer> transform = new ArrayList<>();
+		transform.addAll(this.numSorteados);
 
-        for(Aposta aposta : this.apostas) {
-            int countAcertos = 0;
+		for(Aposta aposta : this.apostas) {
+			int countAcertos = 0;
 
-            for(int i = 0; i < transform.size(); i++) {
-                if(aposta.getNumSelecionados().contains(transform.get(i))) {
-                    countAcertos++;
-                }
-            }
+			for(int i = 0; i < transform.size(); i++) {
+				if(aposta.getNumSelecionados().contains(transform.get(i))) {
+					countAcertos++;
+				}
+			}
 
-            if(this.acertos.containsKey(countAcertos)) {
-                this.acertos.get(countAcertos).add(aposta);
-            }
-            else {
-                this.acertos.put(countAcertos, new ArrayList<Aposta>());
-                this.acertos.get(countAcertos).add(aposta);
-            }
-        }
-    }
+			if(this.acertos.containsKey(countAcertos)) {
+				this.acertos.get(countAcertos).add(aposta);
+			}
+			else {
+				this.acertos.put(countAcertos, new ArrayList<Aposta>());
+				this.acertos.get(countAcertos).add(aposta);
+			}
+		}
+	}
 
-    public void vencedores() {
-        this.testarVencedores();
+	public void vencedores() {
+		this.testarVencedores();
 
-        for (int i = 6; i >= 0; i--) {
-            if(this.acertos.containsKey(i)) {
-                this.vencedores.addAll(this.acertos.get(i));
-                break;
-            }
-        }
-    }
+		for (int i = 6; i >= 0; i--) {
+			if(this.acertos.containsKey(i)) {
+				this.vencedores.addAll(this.acertos.get(i));
+				break;
+			}
+		}
+	}
 
-    public void distribuirPremiacao() {
-        BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
+	public void distribuirPremiacao() {
+		BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
 
-        for (Aposta aposta : this.vencedores) {
-            aposta.getApostador().setSaldo(aposta.getApostador().getSaldo().add(valor));
-        }
-    }
-    
+		for (Aposta aposta : this.vencedores) {
+			aposta.getApostador().setSaldo(aposta.getApostador().getSaldo().add(valor));
+		}
+	}
+	
 }

@@ -26,27 +26,27 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class Usuario implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Integer          id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Integer          id;
 
-    @NotEmpty(message        = "Campo é obrigatório!")
-    private String           nome;
+	@NotEmpty(message        = "Campo é obrigatório!")
+	private String           nome;
 
-    @CPF(message             = "Digite um CPF válido")
-    private String           cpf;
+	@CPF(message             = "Digite um CPF válido")
+	private String           cpf;
 
-    @DateTimeFormat(pattern  = "dd/MM/yyyy")
-    @NotNull(message         = "Campo é obrigatório")
-    @Past(message            = "Não pode ser uma data futura")
-    private Date             dtNascimento;
+	@DateTimeFormat(pattern  = "dd/MM/yyyy")
+	@NotNull(message         = "Campo é obrigatório")
+	@Past(message            = "Não pode ser uma data futura")
+	private Date             dtNascimento;
 
-    @NotEmpty(message        = "Campo é obrigatório!")
-    @Email(message           = "Digite um e-mail válido")
-    private String           email;
+	@NotEmpty(message        = "Campo é obrigatório!")
+	@Email(message           = "Digite um e-mail válido")
+	private String           email;
 
-    @NotEmpty(message        = "Campo é obrigatório!")
-    @Min(value               = 8 
-        ,message             = "A senha precisa conter mais que 8 caracteres")
-    private String           senha;
+	@NotEmpty(message        = "Campo é obrigatório!")
+	@Min(value               = 8 
+		,message             = "A senha precisa conter mais que 8 caracteres")
+	private String           senha;
 }
