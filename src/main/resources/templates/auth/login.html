@@ -5,7 +5,8 @@
 >
 <head>
 		<div th:replace="~{fragments/bootstrap.html :: header}"></div>
-		<title>Login</title>
+		<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+		<title>Sorte.io - Login</title>
 </head>
 <header>
 		<!-- <div th:replace="~{fragments/navbar.html :: navbar}"></div> -->
@@ -25,7 +26,7 @@
 								</div>
 								<button type="submit" class="btn btn-success">Entrar</button>
 								<hr>
-							</form>      
+						</form>
 				</div>
 				<div class="d-grid gap-2 col-2 mx-auto">
 					<a th:href="@{/apostadores/form}" class="btn btn-primary">Cadastrar Apostador</a>          
