@@ -27,7 +27,7 @@
 						<div class="offcanvas-body text-white bg-dark">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
 								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="#">Home</a>
+									<a class="nav-link active" aria-current="page" th:href="@{/home}" >Home</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link active" aria-current="page" href="#">Sorteios</a>
@@ -40,8 +40,9 @@
 					</div>
 					
 				<span class="logo mx-3"><img th:src="@{/images/sorteiologo.png}" ></span>
-				
-				<i class="bi bi-person text-white fs-3 mx-3"></i>
+				<a th:href="@{/login}">
+					<i class="bi bi-person text-white fs-3 mx-3"></i>
+				</a>
 			</div>
 		</nav>
 	</div>

@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html   
-		lang="en"
-		xmlns="www.thymeleaf.org"
+<html
+	lang="en"
+	xmlns="www.thymeleaf.org"
 >
 <head>
-		<div th:replace="~{fragments/bootstrap.html :: header}"></div>
-		<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
-		<title>Sorte.io - Login</title>
+	<div th:replace="~{fragments/bootstrap.html :: header}"></div>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+	<title>Sorte.io - Login</title>
 </head>
 <header>
-		<!-- <div th:replace="~{fragments/navbar.html :: navbar}"></div> -->
 </header>
 <body>
-		<div class="container mx-auto text-center">
-				<img th:src="@{/images/sorteiologo.png}" >
-				<div class="d-flex justify-content-center">
-						<form>
-								<div class="md-3 mb-3">
-									<label for="exampleInputEmail1" class="form-label">E-mail:</label>
-									<input type="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-								</div>
-								<div class="md-4 mb-3">
-									<label for="exampleInputPassword1" class="form-label">Senha:</label>
-									<input type="password" required class="form-control" id="exampleInputPassword1">
-								</div>
-								<button type="submit" class="btn btn-success">Entrar</button>
-								<hr>
-						</form>
-				</div>
-				<div class="d-grid gap-2 col-2 mx-auto">
-					<a th:href="@{/apostadores/form}" class="btn btn-primary">Cadastrar Apostador</a>          
-					<a th:href="@{/controladores/form}" class="btn btn-secondary">Cadastrar Controlador</a> 
-				</div>
-		</div>
+	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
+
+	<div class="container my-5 mx-auto text-center">
+			<img th:src="@{/images/sorteiologo.png}" >
+			<div class="d-flex justify-content-center">
+					<form>
+							<div class="md-3 mb-3">
+								<label for="exampleInputEmail1" class="form-label">E-mail:</label>
+								<input type="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							</div>
+							<div class="md-4 mb-3">
+								<label for="exampleInputPassword1" class="form-label">Senha:</label>
+								<input type="password" required class="form-control" id="exampleInputPassword1">
+							</div>
+							<button type="submit" class="btn btn-success">Entrar</button>
+							<hr>
+					</form>
+			</div>
+			<div class="d-grid gap-2 col-2 mx-auto">
+				<a th:href="@{/apostadores/form}" class="btn btn-primary">Cadastrar Apostador</a>          
+				<a th:href="@{/controladores/form}" class="btn btn-secondary">Cadastrar Controlador</a> 
+			</div>
+	</div>
 </body>
 </html>
