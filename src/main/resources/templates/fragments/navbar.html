@@ -4,6 +4,7 @@
     xmlns="www.thymeleaf.org"
 >
 <head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <div th:replace="~{fragments/bootstrap.html :: header}"></div>
     <title>Navbar</title>
 </head>
@@ -15,7 +16,7 @@
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Sorte.io</a>
+                <span class="logo-bar"><img th:src="@{/images/sorteiologo.png}" ></span>
                 <i class="bi bi-person text-white fs-3"></i>
                 <div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header text-white bg-dark">
