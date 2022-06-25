@@ -9,7 +9,7 @@
 	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
 	<title>Sorte.io - Login</title>
 </head>
-<header>
+<header sec:authorize="isAuthenticated()">
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
 <body>
