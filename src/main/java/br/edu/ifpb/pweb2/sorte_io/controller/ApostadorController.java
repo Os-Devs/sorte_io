@@ -24,16 +24,15 @@ public class ApostadorController {
 	@RequestMapping("/form")
 	public ModelAndView getForm(Apostador apostador, ModelAndView model) {
 		model.addObject("apostador", apostador);
-		model.setViewName("./apostador/formApostador");
+		model.setViewName("/apostador/formApostador");
 
 		return model;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model,
-							 RedirectAttributes flash) {
+	public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model) {
 		if (validation.hasErrors()) {
-			model.setViewName("./apostador/formApostador");
+			model.setViewName("/apostador/formApostador");
 		}
 		else {
 			model.setViewName("/home");

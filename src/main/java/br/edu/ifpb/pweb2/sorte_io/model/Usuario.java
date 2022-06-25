@@ -1,7 +1,7 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +38,7 @@ public abstract class Usuario implements Serializable {
 	@CPF(message             = "Digite um CPF válido")
 	private String           cpf;
 
-	@DateTimeFormat(pattern  = "dd/MM/yyyy")
+	@DateTimeFormat(pattern  = "yyyy-MM-dd")
 	@NotNull(message         = "Campo é obrigatório")
 	@Past(message            = "Não pode ser uma data futura")
 	private Date             dtNascimento;
