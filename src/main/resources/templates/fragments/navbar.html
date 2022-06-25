@@ -16,7 +16,7 @@
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Sorte.io</a>
+                <span class="logo-bar"><img th:src="@{/images/sorteiologo.png}" ></span>
                 <div>
                     <!-- <i class="bi bi-person text-white fs-3"></i> -->
                     <span sec:authorize="isAuthenticated()" sec:authentication="name" style="color:white;"></span>
