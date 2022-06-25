@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -41,12 +43,8 @@ public abstract class Usuario implements Serializable {
     @Past(message            = "Não pode ser uma data futura")
     private Date             dtNascimento;
 
-    @NotEmpty(message        = "Campo é obrigatório!")
-    @Email(message           = "Digite um e-mail válido")
-    private String           email;
-
-    @NotEmpty(message        = "Campo é obrigatório!")
-    @Min(value               = 8 
-        ,message             = "A senha precisa conter mais que 8 caracteres")
-    private String           senha;
+   /*  @OneToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private User user; */
+   
 }

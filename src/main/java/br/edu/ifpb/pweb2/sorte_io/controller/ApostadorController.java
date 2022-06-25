@@ -36,6 +36,8 @@ public class ApostadorController {
             model.setViewName("./apostador/formApostador");
         }
         else {
+            this.repositoryApostadores.save(apostador);
+            
             model.setViewName("/home");
         }
 
