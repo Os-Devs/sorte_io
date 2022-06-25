@@ -21,6 +21,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+            .antMatchers("/apostadores/form", "/controladores/form", "/css/**", "/images/**", "/videos/**").permitAll()
             .anyRequest()
             .authenticated()
             .and()
@@ -42,7 +43,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .dataSource(dataSource)
             .passwordEncoder(encoder)
             /* .withUser(
-                User.builder().username("teste@teste.com").password(encoder.encode("teste")).roles("ADMIN").build()
+                User.builder().username("controlador@gmail.com").password(encoder.encode("controlador123")).roles("CONTROLLER").build()
+            )
+            .withUser(
+                User.builder().username("apostador@gmail.com").password(encoder.encode("apostador123")).roles("USER").build()
             ) */;
     }
     

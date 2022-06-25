@@ -7,6 +7,9 @@
 	<div th:replace="~{fragments/bootstrap.html :: header}"></div>
 	<title>Cadastro Apostador</title>
 </head>
+<header sec:authorize="isAuthenticated()">
+	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
+</header>
 <body>
 	<br>
 	<div class="container mt-5 mx-auto text-center">
@@ -34,7 +37,7 @@
 					<p class="alert alert-danger" th:if="${#fields.hasErrors('dtNascimento')}" th:errors="*{dtNascimento}" th:errorclass="error"></p>
 				</div>  
 
-				<div class="md-3 mb-3">
+<!-- 				<div class="md-3 mb-3">
 				  <label for="email" class="form-label">E-mail:</label>
 				  <input type="text" th:field="*{email}" class="form-control" id="email" ><br>
 				  <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></p>
@@ -44,7 +47,7 @@
 				  <label for="exampleInputPassword" class="form-label">Senha:</label>
 				  <input type="password" th:field="*{senha}" class="form-control" id="senha"><br>
 				  <p class="alert alert-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" th:errorclass="error"></p>
-				</div>
+				</div> -->
 
 				<hr>
 				
