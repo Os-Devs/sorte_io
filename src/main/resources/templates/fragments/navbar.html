@@ -9,42 +9,46 @@
 	<title>Navbar</title>
 </head>
 <body>
-	<div th:fragment="navbar">
-		<div class="container-fluid">
-			<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div th:fragment="navbar">
+        <div class="container-fluid">
+            <nav class="navbar navbar-dark bg-dark fixed-top">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" 
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">Sorte.io</a>
+                <div>
+                    <!-- <i class="bi bi-person text-white fs-3"></i> -->
+                    <span sec:authorize="isAuthenticated()" sec:authentication="name" style="color:white;"></span>
+                    <a href="#" onclick="document.querySelector('#form-login').submit()" class="btn btn-primary" sec:authorize="isAuthenticated()">
+                        Logout
+                    </a>
 
-				<button class="navbar-toggler mx-3" type="button" data-bs-toggle="offcanvas" 
-					data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-						<span class="navbar-toggler-icon"></span>
-				</button>
-					<div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
-						<div class="offcanvas-header text-white bg-dark">
-							<h5 class="offcanvas-title">Menu</h5>
-							<button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">
-								<i class="bi bi-x-lg"></i>
-							</button>
-						</div>
-						<div class="offcanvas-body text-white bg-dark">
-							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
-								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" th:href="@{/home}" >Home</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="#">Sorteios</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="#">Apostas</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					
-				<span class="logo mx-3"><img th:src="@{/images/sorteiologo.png}" ></span>
-				<a th:href="@{/login}">
-					<i class="bi bi-person text-white fs-3 mx-3"></i>
-				</a>
-			</div>
-		</nav>
-	</div>
+                    <form th:action="@{/logout}" id="form-login" method="post"></form>
+                </div>
+                <div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header text-white bg-dark">
+                        <h5 class="offcanvas-title">Menu</h5>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="offcanvas-body text-white bg-dark">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Sorteios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Apostas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 </body>
 </html>
