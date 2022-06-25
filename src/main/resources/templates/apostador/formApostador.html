@@ -29,13 +29,13 @@
 					<label for="cpf" class="form-label">CPF:</label>
 					<input type="text" th:field="*{cpf}" class="form-control" id="cpf"><br>
 					<p class="alert alert-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" th:errorclass="error"></p>
-				</div>  
+				</div>
 
 				<div class="md-3 mb-3">
 					<label for="date" class="form-label">Data de Nascimento:</label>
 					<input type="text" th:field="*{dtNascimento}" class="form-control" id="dt_nascimento"><br>
 					<p class="alert alert-danger" th:if="${#fields.hasErrors('dtNascimento')}" th:errors="*{dtNascimento}" th:errorclass="error"></p>
-				</div>  
+				</div>
 
 <!-- 				<div class="md-3 mb-3">
 				  <label for="email" class="form-label">E-mail:</label>
@@ -52,9 +52,9 @@
 				<hr>
 				
 				<button type="submit" class="btn btn-success">Cadastrar</button>   
-			</form>      
+			</form>
 		</div>
-			 
+		
 	</div>
 </body>
 </html>

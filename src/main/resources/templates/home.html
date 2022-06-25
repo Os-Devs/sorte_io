@@ -9,9 +9,10 @@
 	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
 	<title>Sorte.io - Home</title>
 </head>
-<body>
+<header>
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
-
+</header>
+<body>
 	<div class="video-container">
 		<video autoplay loop muted>
 			<source th:src="@{/videos/videocut.webm}" type="video/webm">

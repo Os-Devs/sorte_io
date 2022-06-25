@@ -17,23 +17,23 @@
 	<div class="container my-5 mx-auto text-center">
 		<img th:src="@{/images/sorteiologo.png}" >
 		<div class="d-flex justify-content-center">
-            <form th:action="@{/login}" method="post">
-              <div class="md-3 mb-3">
-                <label for="username" class="form-label">E-mail:</label>
-                <input type="text" required class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
-              <div class="md-4 mb-3">
-                <label for="password" class="form-label">Senha:</label>
-                <input type="password" required class="form-control" name="password" id="exampleInputPassword1">
-              </div>
-              <button type="submit" class="btn btn-success">Entrar</button>
-              <hr>
-            </form>    
-        </div>
-        <div class="d-grid gap-2 col-2 mx-auto">
-          <a th:href="@{/apostadores/form}" class="btn btn-primary">Cadastrar Apostador</a>          
-          <a th:href="@{/controladores/form}" class="btn btn-secondary">Cadastrar Controlador</a>
-        </div>
-    </div>
+						<form th:action="@{/login}" method="post">
+							<div class="md-3 mb-3">
+								<label for="username" class="form-label">E-mail:</label>
+								<input type="text" required class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+							</div>
+							<div class="md-4 mb-3">
+								<label for="password" class="form-label">Senha:</label>
+								<input type="password" required class="form-control" name="password" id="exampleInputPassword1">
+							</div>
+							<button type="submit" class="btn btn-success">Entrar</button>
+							<hr>
+						</form>
+				</div>
+				<div class="d-grid gap-2 col-2 mx-auto">
+					<a th:href="@{/apostadores/form}" class="btn btn-primary">Cadastrar Apostador</a>          
+					<a th:href="@{/controladores/form}" class="btn btn-secondary">Cadastrar Controlador</a>
+				</div>
+		</div>
 </body>
 </html>
