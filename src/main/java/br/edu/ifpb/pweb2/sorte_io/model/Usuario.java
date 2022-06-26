@@ -1,8 +1,7 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-// import java.util.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +11,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Min;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -39,11 +38,7 @@ public abstract class Usuario implements Serializable {
 	)
 	private String nome;
 
-	@CPF(
-		message = "Digite um CPF válido"
-	)
 	private String cpf;
-
 	@DateTimeFormat(
 		pattern = "yyyy-MM-dd"
 	)
@@ -53,15 +48,20 @@ public abstract class Usuario implements Serializable {
 	@Past(
 		message = "Não pode ser uma data futura"
 	)
-	private LocalDate dtNascimento;
+	private Date dtNascimento;
+
+	@NotEmpty(message = "Campo é obrigatório")
+	@Transient
+	private String nick;
 
 	@NotEmpty(
 		message = "Campo é obrigatório!"
 	)
-	@Min(
-		value = 8,
-		message = "Digite uma senha com no mínimo 8 caracteres"
+	@Size(
+		min = 8,
+		message = "A senha precisa ter no mínimo 8 caracteres"
 	)
+	@Transient
 	private String senha;
 
     @OneToOne
