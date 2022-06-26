@@ -10,9 +10,8 @@
 <header sec:authorize="isAuthenticated()">
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
-<body>
-	<br>
-	<div class="container mt-5 mx-auto text-center">
+<body class="bg-dark text-white">
+	<div class="container align-items-center mt-5 mx-auto text-center">
 		<h1>Cadastro Apostador</h1>
 		<div class="d-flex justify-content-center">
 			<form th:action="@{/apostadores}" method="post" th:object="${apostador}">
