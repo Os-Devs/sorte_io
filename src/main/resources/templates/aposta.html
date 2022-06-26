@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html 
+	lang="en"
+	xmlns="www.thymeleaf.org"
+>
+<head>
+	<div th:replace="~{fragments/bootstrap.html :: header}"></div>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+	<title>Sorte.io - Apostas</title>
+</head>
+<header>
+	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
+</header>
+<body>
+
+	<!-- <div class="video-container">
+		<video autoplay loop muted>
+			<source th:src="@{/videos/videocut.webm}" type="video/webm">
+		</video>
+	</div> -->
+
+	<!-- <div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div> -->
+
+	<div th:replace="~{fragments/footer.html :: footer}"></div>
+
+</body>
+</html>

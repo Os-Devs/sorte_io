@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html 
+	lang="en"
+	xmlns="www.thymeleaf.org"
+>
+<head>
+	<div th:replace="~{fragments/bootstrap.html :: header}"></div>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+	<title>Sorte.io - Sorteios</title>
+</head>
+<header>
+	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
+</header>
+<body>
+	<div class="container align-items-center">
+		<div class="row row-cols-1 row-cols-md-2 g-4">
+			<div class="col .h-100">
+				<div class="card border-secondary mb-3" style="max-width: 18rem;">
+					<div class="card-header">Sorteio 1</div>
+					<div class="card-body text-secondary">
+					<h5 class="card-title">Sortezona</h5>
+					<p class="card-text">Ta com money em querido</p>
+					</div>
+				</div>
+			</div>
+			<div class="col .h-100">
+				<div class="card border-secondary mb-3" style="max-width: 18rem;">
+					<div class="card-header">Sorteio 2</div>
+					<div class="card-body text-secondary">
+						<h5 class="card-title">Sortada</h5>
+						<p class="card-text">Ousado em?</p>
+					</div>
+				</div>
+			</div>
+			<div class="col .h-100">
+				<div class="card border-secondary mb-3" style="max-width: 18rem;">
+					<div class="card-header">Sorteio 3</div>
+					<div class="card-body text-secondary">
+					<h5 class="card-title">Sortinha</h5>
+					<p class="card-text">Aqui é safe</p>
+				</div>
+				</div>
+			</div>
+			<div class="col .h-100">
+				<div class="card border-secondary mb-3" style="max-width: 18rem;">
+					<div class="card-header">Sorteio 4</div>
+					<div class="card-body text-secondary">
+					<h5 class="card-title">Sortezinha</h5>
+					<p class="card-text">Amarelou?</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<!-- <div class="video-container">
+		<video autoplay loop muted>
+			<source th:src="@{/videos/videocut.webm}" type="video/webm">
+		</video>
+	</div> -->
+	
+	<!-- <div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div> -->
+
+	<div th:replace="~{fragments/footer.html :: footer}"></div>
+
+</body>
+</html>
