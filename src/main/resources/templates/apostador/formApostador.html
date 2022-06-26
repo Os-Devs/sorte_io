@@ -27,7 +27,7 @@
 
 				<div class="mt-3 md-3 mb-3">
 					<label for="cpf" class="form-label">CPF:</label>
-					<input type="text" th:field="*{cpf}" class="form-control" id="cpf"><br>
+					<input type="text" th:field="*{cpf}" class="form-control" id="cpf" placeholder="000.000.000-00"><br>
 					<p class="alert alert-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" th:errorclass="error"></p>
 				</div>
 
@@ -42,22 +42,20 @@
 					</p>
 				</div>  
 
-<!-- 			
 				<div class="md-3 mb-3">
-				  <label for="email" class="form-label">E-mail:</label>
-				  <input type="text" th:field="*{email}" class="form-control" id="email" ><br>
-				  <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></p>
+				  <label for="username" class="form-label">Username:</label>
+				  <input type="text" th:field="*{nick}" class="form-control" id="nick" name="username"><br>
+				  <p class="alert alert-danger" th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}" th:errorclass="error"></p>
 				</div>
 
 				<div class="md-4 mb-3">
 				  <label for="exampleInputPassword" class="form-label">Senha:</label>
-				  <input type="password" th:field="*{senha}" class="form-control" id="senha"><br>
+				  <input type="password" th:field="*{senha}" class="form-control" id="senha" name="password"><br>
 				  <p class="alert alert-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" th:errorclass="error"></p>
 				</div> 
--->
 
 				<hr>
-				
+
 				<button type="submit" class="btn btn-success">Cadastrar</button>   
 			</form>
 		</div>

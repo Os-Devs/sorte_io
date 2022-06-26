@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,18 +21,8 @@ import lombok.ToString;
 public class User {
 
     @Id
-    @NotEmpty(
-        message = "Campo é obrigatório!"
-    )
     private String username;
 
-    @NotEmpty(
-        message = "Campo é obrigatório!"
-    )
-    @Min(
-        value = 8,
-        message = "A senha precisa conter mais que 8 caracteres"
-    )
     private String password;
 
     private Boolean enabled;

@@ -44,10 +44,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .dataSource(dataSource)
             .passwordEncoder(encoder)
             /* .withUser(
-                User.builder().username("controlador@gmail.com").password(encoder.encode("controlador123")).roles("CONTROLLER").build()
+                User.builder().username("controlador").password(encoder.encode("controlador123")).roles("CONTROLLER").build()
             )
             .withUser(
-                User.builder().username("apostador@gmail.com").password(encoder.encode("apostador123")).roles("USER").build()
+                User.builder().username("apostador").password(encoder.encode("apostador123")).roles("USER").build()
             ) */;
     }
     
