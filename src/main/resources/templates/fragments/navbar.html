@@ -9,57 +9,62 @@
 	<title>Navbar</title>
 </head>
 <body>
-    <div th:fragment="navbar">
-        <div class="">
-            <nav class="navbar navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" 
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <span class="logo-bar"><img th:src="@{/images/sorteiologo.png}" ></span>
+	<div th:fragment="navbar">
+		<div class="">
+			<nav class="navbar navbar-dark bg-dark">
+				<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+						<span class="navbar-toggler-icon"></span>
+				</button>
 
-                <div>
-                    <ul class="nav pull-right">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-fill"></i>
-                                <span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-coin"></i> Minhas Apostas</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <a class="dropdown-item" href="#" onclick="document.querySelector('#form-login').submit()" sec:authorize="isAuthenticated()">
-                                    <i class="bi bi-box-arrow-right"></i> Logout
-                                </a>
-                                <form th:action="@{/logout}" id="form-login" method="post"></form>
-                            </ul>
-                          </li>
-                    </ul>
-                </div>
-                
-                <div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header text-white bg-dark">
-                        <h5 class="offcanvas-title">Menu</h5>
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <div class="offcanvas-body text-white bg-dark">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
-                            <li class="nav-item">
+				<span class="logo-bar"><img th:src="@{/images/sorteiologo.png}" ></span>
+
+				<div>
+					<ul class="nav pull-right">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-person-fill"></i>
+								<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+								<li>
+									<a class="dropdown-item" href="#"><i class="bi bi-coin"></i> Minhas Apostas</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<a class="dropdown-item" href="#" onclick="document.querySelector('#form-login').submit()" sec:authorize="isAuthenticated()">
+									<i class="bi bi-box-arrow-right"></i> Logout
+								</a>
+								<form th:action="@{/logout}" id="form-login" method="post"></form>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
+					<div class="offcanvas-header text-white bg-dark">
+						<h5 class="offcanvas-title">Menu</h5>
+						<button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">
+							<i class="bi bi-x-lg"></i>
+						</button>
+					</div>
+					<div class="offcanvas-body text-white bg-dark">
+						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
+							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" th:href="@{/home}" >Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Sorteios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Apostas</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" th:href="@{/sorteios/sorteio}">Sorteios</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" th:href="@{/apostas/aposta}">Apostas</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+	</div>
 </body>
 </html>
