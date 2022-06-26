@@ -12,93 +12,45 @@
 <header>
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
-<body>
-
-	<div class=" d-flex flex-grow-1 flex-wrap justify-content-evenly px-3 py-3 gap-3">
-				
-		<div class="card border border-success border-2 h-100 my-2 flex-grow-1 bg-dark">
-			<div class="card-body text-success border-secondary">
-				<h5 class="card-title">Sorteio 1</h5>
-				<p class="card-text"> Descrição do sorteio</p>
+<body class="bg-dark text-white">
+	<div class="container">
+		<div class="d-flex flex-grow-1 flex-wrap justify-content-evenly text-center px-3 py-5 gap-3">
+			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient ">
+				<div class="card-body text-white border-secondary">
+					<h5 class="card-title">Sorteio 1</h5>
+					<p class="card-text"> Descrição do sorteio</p>
+				</div>
+			</div>
+			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient">
+				<div class="card-body text-white border-secondary">
+					<h5 class="card-title">Sorteio 2</h5>
+					<p class="card-text"> Descrição do sorteio</p>
+				</div>
+			</div>
+			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient">
+				<div class="card-body text-white border-secondary">
+					<h5 class="card-title">Sorteio 3</h5>
+					<p class="card-text"> Descrição do sorteio</p>
+				</div>
+			</div>
+			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient">
+				<div class="card-body text-white border-secondary">
+					<h5 class="card-title">Sorteio 4</h5>
+					<p class="card-text"> Descrição do sorteio</p>
+				</div>
+			</div>
+			<div class="card border border-success rounded-pill border-3 h-100 m-2 flex-grow-1  bg-success bg-gradient">
+				<div class="card-body text-white border-secondary">
+					<h5 class="card-title">Sorteio 5</h5>
+					<p class="card-text"> Descrição do sorteio</p>
+				</div>
 			</div>
 		</div>
-		<div class="card border border-success border-2 h-100 my-2 flex-grow-1 bg-dark">
-			<div class="card-body text-success border-secondary">
-				<h5 class="card-title">Sorteio 2</h5>
-				<p class="card-text"> Descrição do sorteio</p>
-			</div>
-		</div>
-		<div class="card border border-success border-2 h-100 my-2 flex-grow-1 bg-dark">
-			<div class="card-body text-success border-secondary">
-				<h5 class="card-title">Sorteio 3</h5>
-				<p class="card-text"> Descrição do sorteio</p>
-			</div>
-		</div>
-		<div class="card border border-success border-2 h-100 my-2 flex-grow-1 bg-dark">
-			<div class="card-body text-success border-secondary">
-				<h5 class="card-title">Sorteio 4</h5>
-				<p class="card-text"> Descrição do sorteio</p>
-			</div>
-		</div>
-		<div class="card border border-success border-2 h-100 m-2 flex-grow-1  bg-dark">
-			<div class="card-body text-success border-secondary">
-				<h5 class="card-title">Sorteio 5</h5>
-				<p class="card-text"> Descrição do sorteio</p>
-			</div>
-		</div>
-
 	</div>
 
-<!-- 		
-		<div class="container align-items-center">
-			<div class="col .h-100">
-				<div class="card border-secondary mb-3" style="max-width: 18rem;">
-					<div class="card-header">Sorteio 1</div>
-					<div class="card-body text-success text-secondary">
-					<h5 class="card-title">Sortezona</h5>
-					<p class="card-text">Ta com money em querido</p>
-					</div>
-				</div>
-			</div>
-			<div class="col .h-100">
-				<div class="card border-secondary mb-3" style="max-width: 18rem;">
-					<div class="card-header">Sorteio 2</div>
-					<div bg-dark class="card-body text-success text-secondary">
-						<h5 class="card-title">Sortada</h5>
-						<p class="card-text">Ousado em?</p>
-					</div>
-				</div>
-			</div>
-			<div class="col .h-100">
-				<div class="card border-secondary mb-3" style="max-width: 18rem;">
-					<div class="card-header">Sorteio 3</div>
-					<div bg-dark class="card-body text-success text-secondary">
-					<h5 class="card-title">Sortinha</h5>
-					<p class="card-text">Aqui é safe</p>
-				</div>
-				</div>
-			</div>
-			<div class="col .h-100">
-				<div class="card border-secondary mb-3" style="max-width: 18rem;">
-					<div class="card-header">Sorteio 4</div>
-					<div bg-dark class="card-body text-success text-secondary">
-					<h5 class="card-title">Sortezinha</h5>
-					<p class="card-text">Amarelou?</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-		
-	<!-- <div class="video-container">
-		<video autoplay loop muted>
-			<source th:src="@{/videos/videocut.webm}" type="video/webm">
-		</video>
-	</div> -->
-	
-	<!-- <div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div> -->
-
-	<div th:replace="~{fragments/footer.html :: footer}"></div>
+	<div class="fixed-bottom">
+		<div th:replace="~{fragments/footer.html :: footer}"></div>
+	</div>
 
 </body>
 </html>

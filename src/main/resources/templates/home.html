@@ -12,16 +12,17 @@
 <header>
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
-<body>
-	<div class="video-container">
-		<video autoplay loop muted>
-			<source th:src="@{/videos/videocut.webm}" type="video/webm">
-		</video>
-	</div>
+<body class="bg-dark text-white">
 
-	<div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div>
-
-	<div th:replace="~{fragments/footer.html :: footer}"></div>
+		<div class="video-container">
+			<video autoplay loop muted>
+				<source th:src="@{/videos/videocut.webm}" type="video/webm">
+			</video>
+		</div>
+		
+		<div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div>
+		
+		<div th:replace="~{fragments/footer.html :: footer}"></div>
 
 </body>
 </html>
