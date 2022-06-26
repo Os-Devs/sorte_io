@@ -1,10 +1,14 @@
-.logo img {
+.logo-bar img {
 	vertical-align: sub;
-	margin-right: 5px;
+	margin-left: 120px;
 	width: 120px;
 }
 
 video {
 	width: 100%;
 	height: auto;
+}
+
+#navbarDropdown {
+	color: white;
 }

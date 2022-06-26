@@ -16,16 +16,27 @@
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Sorte.io</a>
-                <div>
-                    <!-- <i class="bi bi-person text-white fs-3"></i> -->
-                    <span sec:authorize="isAuthenticated()" sec:authentication="name" style="color:white;"></span>
-                    <a href="#" onclick="document.querySelector('#form-login').submit()" class="btn btn-primary" sec:authorize="isAuthenticated()">
-                        Logout
-                    </a>
+                <span class="logo-bar"><img th:src="@{/images/sorteiologo.png}" ></span>
 
-                    <form th:action="@{/logout}" id="form-login" method="post"></form>
+                <div>
+                    <ul class="nav pull-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-fill"></i>
+                                <span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-coin"></i> Minhas Apostas</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <a class="dropdown-item" href="#" onclick="document.querySelector('#form-login').submit()" sec:authorize="isAuthenticated()">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </a>
+                                <form th:action="@{/logout}" id="form-login" method="post"></form>
+                            </ul>
+                          </li>
+                    </ul>
                 </div>
+                
                 <div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header text-white bg-dark">
                         <h5 class="offcanvas-title">Menu</h5>
