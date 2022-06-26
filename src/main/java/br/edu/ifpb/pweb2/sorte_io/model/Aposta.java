@@ -23,20 +23,28 @@ import lombok.Setter;
 @Table(name = "apostas")
 public class Aposta {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name             = "id_aposta")
-	private Integer          id;
+	@GeneratedValue(
+		strategy = GenerationType.IDENTITY
+	)
+	@Column(
+		name = "id_aposta"
+	)
+	private Integer id;
 
 	@ElementCollection
-	private Set<Integer>   numSelecionados;
+	private Set<Integer> numSelecionados;
 
-	private int             quantUso;
-
-	@ManyToOne
-	@JoinColumn(name        = "id_apostador")
-	private Apostador       apostador;
+	private int quantUso;
 
 	@ManyToOne
-	@JoinColumn(name        = "id_sorteio")
-	private Sorteio         sorteio;
+	@JoinColumn(
+		name = "id_apostador"
+	)
+	private Apostador apostador;
+
+	@ManyToOne
+	@JoinColumn(
+		name = "id_sorteio"
+	)
+	private Sorteio sorteio;
 }

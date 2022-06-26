@@ -1,8 +1,8 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -35,26 +35,38 @@ import lombok.Setter;
 @Table(name = "sorteios")
 public class Sorteio {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer          id;
+	@GeneratedValue(
+		strategy = GenerationType.IDENTITY
+	)
+	private Integer id;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	@Future(message         = "A realização precisa ser numa data futura")
-	private Date            dtRealizacao;
-
+	@DateTimeFormat(
+		pattern = "dd/MM/yyyy HH:mm"
+	)
+	@Future(
+		message = "A realização precisa ser numa data futura"
+	)
+	private LocalDateTime dtRealizacao;
+	
 	@ElementCollection
-	private Set<Integer>   numSorteados;
+	private Set<Integer> numSorteados;
 
-	@NumberFormat(pattern   = "###.###,##")
-	private BigDecimal      valPremiacao;
+	@NumberFormat(
+		pattern = "###.###,##"
+	)
+	private BigDecimal valPremiacao;
 
 	@OneToOne
-	@JoinColumn(name        = "id_controlador")
-	private Controlador     criadoPor;
+	@JoinColumn(
+		name = "id_controlador"
+	)
+	private Controlador criadoPor;
 
 	@OneToMany
-	@JoinColumn(name        = "id_aposta")
-	private List<Aposta>    apostas;
+	@JoinColumn(
+		name = "id_aposta"
+	)
+	private List<Aposta> apostas;
 
 	@Transient
 	private List<Aposta> vencedores;

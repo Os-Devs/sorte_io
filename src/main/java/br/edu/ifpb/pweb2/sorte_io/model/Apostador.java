@@ -22,6 +22,8 @@ public class Apostador extends Usuario {
 	private BigDecimal saldo = BigDecimal.ZERO;
 
 	@OneToMany
-	@JoinColumn(name         = "id_aposta")
-	private List<Aposta>     apostas;
+	@JoinColumn(
+		name = "id_aposta"
+	)
+	private List<Aposta> apostas;
 }
