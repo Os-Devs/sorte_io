@@ -5,21 +5,20 @@ import javax.validation.Valid;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Apostador;
-import br.edu.ifpb.pweb2.sorte_io.repository.RepositoryApostadores;
+import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
 
 @Controller
 @RequestMapping("/apostadores")
 public class ApostadorController {
 
 	@Autowired
-	RepositoryApostadores repositoryApostadores;
+	ApostadoresRepository repositoryApostadores;
 
 	@RequestMapping("/form")
 	public ModelAndView getForm(Apostador apostador, ModelAndView model) {

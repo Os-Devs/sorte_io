@@ -26,10 +26,19 @@ public class Authority {
     private AuthorityId id;
 
     @ManyToOne
-    @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
+    @JoinColumn(
+        name = "username", 
+        referencedColumnName = "username", 
+        insertable = false, 
+        updatable = false
+    )
     private User username;
 
-    @Column(name = "authority", insertable = false, updatable = false)
+    @Column(
+        name = "authority", 
+        insertable = false, 
+        updatable = false
+    )
     private String authority;
 
     @Embeddable
