@@ -13,19 +13,19 @@
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
 <body class="bg-dark text-white">
-
-	<div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
-		<input class="form-check-input" type="checkbox" th:value="${n}" th:text="' ' + ${n}" size="1">
+	<div class="container">
+		<div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
+			<input type="checkbox" class="btn-check" th:id="${n}" autocomplete="off">
+			<label class="btn btn-outline-success" th:attr="for=${n}" th:text="${n}"></label>
+		</div>
 	</div>
-	<!-- <div class="video-container">
-		<video autoplay loop muted>
-			<source th:src="@{/videos/videocut.webm}" type="video/webm">
-		</video>
+
+	<!-- <div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
+		<input class="form-check-input" type="checkbox" th:value="${n}" th:text="' ' + ${n}">
 	</div> -->
-
-	<!-- <div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div> -->
-
-	<div th:replace="~{fragments/footer.html :: footer}"></div>
+	<div class="fixed-bottom">
+		<div th:replace="~{fragments/footer.html :: footer}"></div>
+	</div>
 
 </body>
 </html>
