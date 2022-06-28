@@ -50,5 +50,5 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 User.builder().username("apostador").password(encoder.encode("apostador123")).roles("USER").build()
             ) */;
     }
-    
+
 }
