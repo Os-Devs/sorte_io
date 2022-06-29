@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,6 +26,7 @@ import org.springframework.format.annotation.NumberFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
@@ -41,7 +42,7 @@ public class Sorteio {
 	private Integer id;
 
 	@DateTimeFormat(
-		pattern = "dd/MM/yyyy HH:mm"
+		pattern = "yyyy-MM-dd'T'HH:mm:ss"
 	)
 	@Future(
 		message = "A realização precisa ser numa data futura"
@@ -49,7 +50,7 @@ public class Sorteio {
 	private LocalDateTime dtRealizacao;
 	
 	@ElementCollection
-	private Set<Integer> numSorteados;
+	private Set<String> numSorteados;
 
 	@NumberFormat(
 		pattern = "###.###,##"
@@ -57,15 +58,13 @@ public class Sorteio {
 	private BigDecimal valPremiacao;
 
 	@OneToOne
-	@JoinColumn(
-		name = "id_controlador"
-	)
 	private Controlador criadoPor;
 
-	@OneToMany
-	@JoinColumn(
-		name = "id_aposta"
+	@OneToMany(
+		mappedBy = "sorteio",
+		cascade = CascadeType.ALL
 	)
+	@ToString.Exclude
 	private List<Aposta> apostas;
 
 	@Transient
@@ -74,23 +73,26 @@ public class Sorteio {
 	@Transient
 	private Map<Integer, List<Aposta>> acertos;
 
+	@Transient
+	private Set<Integer> auxSet;
+
 	
 	public void sortear() {
 		Random gerador = new Random();
 
 		while(this.numSorteados.size() < 6) {
-			int nSorteado = gerador.nextInt(1, 61);
+			Integer nSorteado = gerador.nextInt(1, 61);
 
-			this.numSorteados.add(nSorteado);
+			this.numSorteados.add(nSorteado.toString());
 		}
 	}
 
-	public void sortear(Set<Integer> manual) {
+	public void sortear(Set<String> manual) {
 		this.numSorteados = manual;
 	}
 	
 	public void testarVencedores() {
-		List<Integer> transform = new ArrayList<>();
+		List<String> transform = new ArrayList<>();
 		transform.addAll(this.numSorteados);
 
 		for(Aposta aposta : this.apostas) {
@@ -115,7 +117,7 @@ public class Sorteio {
 	public void vencedores() {
 		this.testarVencedores();
 
-		for (int i = 6; i >= 0; i--) {
+		for(int i = 6; i >= 0; i--) {
 			if(this.acertos.containsKey(i)) {
 				this.vencedores.addAll(this.acertos.get(i));
 				break;
@@ -126,7 +128,7 @@ public class Sorteio {
 	public void distribuirPremiacao() {
 		BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
 
-		for (Aposta aposta : this.vencedores) {
+		for(Aposta aposta : this.vencedores) {
 			aposta.getApostador().setSaldo(aposta.getApostador().getSaldo().add(valor));
 		}
 	}

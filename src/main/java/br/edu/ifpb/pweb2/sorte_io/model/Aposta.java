@@ -8,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,14 +36,8 @@ public class Aposta {
 	private boolean favorito;
 
 	@ManyToOne
-	@JoinColumn(
-		name = "id_apostador"
-	)
 	private Apostador apostador;
 
 	@ManyToOne
-	@JoinColumn(
-		name = "id_sorteio"
-	)
 	private Sorteio sorteio;
 }

@@ -13,5 +13,5 @@ import lombok.Setter;
 @Entity
 @Table(name = "controladores")
 public class Controlador extends Usuario {
-
+    
 }
