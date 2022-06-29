@@ -16,7 +16,9 @@
 	<div class="container mt-4">
 		<div class="d-flex justify-content-center">
 
-			<div th:text="${Teste}"></div>
+			<div th:text="${Teste}">
+				
+			</div>
 
 			<form th:action="@{/apostas}" method="post" th:object="${aposta}">
 				

@@ -49,7 +49,7 @@ public class Sorteio {
 	private LocalDateTime dtRealizacao;
 	
 	@ElementCollection
-	private Set<Integer> numSorteados;
+	private Set<String> numSorteados;
 
 	@NumberFormat(
 		pattern = "###.###,##"
@@ -74,30 +74,41 @@ public class Sorteio {
 	@Transient
 	private Map<Integer, List<Aposta>> acertos;
 
+	@Transient
+	private Set<Integer> auxSet;
+
 	
 	public void sortear() {
 		Random gerador = new Random();
 
-		while(this.numSorteados.size() < 6) {
+		while(this.auxSet.size() < 6) {
 			int nSorteado = gerador.nextInt(1, 61);
 
-			this.numSorteados.add(nSorteado);
+			this.auxSet.add(nSorteado);
 		}
+
+		this.auxSet.stream().map(
+			value -> this.numSorteados.add(value.toString())
+		);
 	}
 
 	public void sortear(Set<Integer> manual) {
-		this.numSorteados = manual;
+		this.auxSet = manual;
+
+		this.auxSet.stream().map(
+			value -> this.numSorteados.add(value.toString())
+		);
 	}
 	
 	public void testarVencedores() {
 		List<Integer> transform = new ArrayList<>();
-		transform.addAll(this.numSorteados);
+		transform.addAll(this.auxSet);
 
 		for(Aposta aposta : this.apostas) {
 			int countAcertos = 0;
 
 			for(int i = 0; i < transform.size(); i++) {
-				if(aposta.getNumSelecionados().contains(transform.get(i))) {
+				if(aposta.getNumSelecionados().contains(transform.get(i).toString())) {
 					countAcertos++;
 				}
 			}
