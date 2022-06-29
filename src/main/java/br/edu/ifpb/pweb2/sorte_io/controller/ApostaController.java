@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.sorte_io.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import br.edu.ifpb.pweb2.sorte_io.repository.ApostasRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
+import br.edu.ifpb.pweb2.sorte_io.repository.ApostasRepository;
+import br.edu.ifpb.pweb2.sorte_io.repository.SorteiosRepository;
 import br.edu.ifpb.pweb2.sorte_io.model.Aposta;
+import br.edu.ifpb.pweb2.sorte_io.model.Apostador;
 
 @Controller
 @RequestMapping("/apostas")
@@ -26,6 +32,12 @@ public class ApostaController {
 
 	@Autowired
 	ApostasRepository apostasRepository;
+
+	@Autowired
+	SorteiosRepository sorteiosRepository;
+
+	@Autowired
+	ApostadoresRepository apostadoresRepository;
 
 	@RequestMapping("/aposta")
 	public ModelAndView aposta(ModelAndView model) {
@@ -58,8 +70,20 @@ public class ApostaController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView save(Aposta aposta, @RequestParam(name = "checkboxes") String value, ModelAndView model, RedirectAttributes flash) {
+	public ModelAndView save(Aposta aposta, @RequestParam(name = "checkboxes") String value, ModelAndView model, RedirectAttributes flash, Principal auth) {
 		Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
+
+		if(values.size() < 6 || values.size() > 10) {
+			//ERROR
+		}
+		else {
+			if(apostadoresRepository.findByUser(auth.getName()).isPresent()) {
+				Apostador apostador = apostadoresRepository.findByUser(auth.getName()).get();
+			}
+			
+		}
+
+		
 		
 		flash.addFlashAttribute("Teste", values);
 

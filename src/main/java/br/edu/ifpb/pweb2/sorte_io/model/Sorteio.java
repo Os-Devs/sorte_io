@@ -14,8 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Future;
@@ -57,7 +57,7 @@ public class Sorteio {
 	)
 	private BigDecimal valPremiacao;
 
-	@OneToOne
+	@ManyToOne
 	private Controlador criadoPor;
 
 	@OneToMany(
