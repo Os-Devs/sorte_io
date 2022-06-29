@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ import org.springframework.format.annotation.NumberFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
@@ -62,10 +64,14 @@ public class Sorteio {
 	)
 	private Controlador criadoPor;
 
-	@OneToMany
+	@OneToMany(
+		mappedBy = "sorteio",
+		cascade = CascadeType.ALL
+	)
 	@JoinColumn(
 		name = "id_aposta"
 	)
+	@ToString.Exclude
 	private List<Aposta> apostas;
 
 	@Transient
@@ -81,34 +87,26 @@ public class Sorteio {
 	public void sortear() {
 		Random gerador = new Random();
 
-		while(this.auxSet.size() < 6) {
-			int nSorteado = gerador.nextInt(1, 61);
+		while(this.numSorteados.size() < 6) {
+			Integer nSorteado = gerador.nextInt(1, 61);
 
-			this.auxSet.add(nSorteado);
+			this.numSorteados.add(nSorteado.toString());
 		}
-
-		this.auxSet.stream().map(
-			value -> this.numSorteados.add(value.toString())
-		);
 	}
 
-	public void sortear(Set<Integer> manual) {
-		this.auxSet = manual;
-
-		this.auxSet.stream().map(
-			value -> this.numSorteados.add(value.toString())
-		);
+	public void sortear(Set<String> manual) {
+		this.numSorteados = manual;
 	}
 	
 	public void testarVencedores() {
-		List<Integer> transform = new ArrayList<>();
-		transform.addAll(this.auxSet);
+		List<String> transform = new ArrayList<>();
+		transform.addAll(this.numSorteados);
 
 		for(Aposta aposta : this.apostas) {
 			int countAcertos = 0;
 
 			for(int i = 0; i < transform.size(); i++) {
-				if(aposta.getNumSelecionados().contains(transform.get(i).toString())) {
+				if(aposta.getNumSelecionados().contains(transform.get(i))) {
 					countAcertos++;
 				}
 			}
@@ -126,7 +124,7 @@ public class Sorteio {
 	public void vencedores() {
 		this.testarVencedores();
 
-		for (int i = 6; i >= 0; i--) {
+		for(int i = 6; i >= 0; i--) {
 			if(this.acertos.containsKey(i)) {
 				this.vencedores.addAll(this.acertos.get(i));
 				break;
@@ -137,7 +135,7 @@ public class Sorteio {
 	public void distribuirPremiacao() {
 		BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
 
-		for (Aposta aposta : this.vencedores) {
+		for(Aposta aposta : this.vencedores) {
 			aposta.getApostador().setSaldo(aposta.getApostador().getSaldo().add(valor));
 		}
 	}
