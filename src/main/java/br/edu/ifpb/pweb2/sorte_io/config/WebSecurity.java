@@ -23,6 +23,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .antMatchers("/apostadores/form", "/controladores/form", "/apostadores", "/controladores",  
                                         "/css/**", "/images/**", "/videos/**").permitAll()
+            .antMatchers("/sorteios/**").hasRole("CONTROLLER")
             .anyRequest()
             .authenticated()
             .and()

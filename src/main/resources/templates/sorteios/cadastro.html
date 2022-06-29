@@ -15,9 +15,8 @@
 <body class="bg-dark text-white">
 
 	<div class="container text-center mt-4">
+		<div th:text="${mensagem}"></div>
 		<div class="d-flex justify-content-center">
-
-			<div th:text="${Teste}"></div>
 
 			<form th:action="@{/sorteios}" method="post" th:object="${sorteio}">
 				
@@ -29,8 +28,8 @@
 					</div> 
 	
 					<h1 class="display-3 text-center text-white pb-2">Cadastro Sorteios</h1>
-					<p class="lead text-center">Escolha de 6 a 10 números para cadastrar um sorteio</p>
-					<div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
+					<p class="lead text-center">Selecione 6 números para cadastrar um sorteio</p>
+					<div class="form-check form-check-inline" th:each=" n : ${#numbers.sequence(1, 61)}">
 						<input type="checkbox" th:value="${n}" class="btn-check" th:id="${n}" th:name="checkboxes" autocomplete="off">
 						<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:text="${n}"></label>
 					</div>
@@ -40,11 +39,7 @@
 					<div class="mx-5 md-3 mb-3">
 						<label for="dtRealizacao" class="form-label">Data de Realização</label>
 						<input type="datetime-local" th:field="*{dtRealizacao}" class="form-control" id="dt_Realizacao"><br>
-						<p
-								class="alert alert-danger"
-								th:if="${#fields.hasErrors('dtRealizacao')}"
-								th:errors="*{dtRealizacao}"
-								th:errorclass="error">
+						<p class="alert alert-danger" th:if="${#fields.hasErrors('dtRealizacao')}" th:errors="*{dtRealizacao}" th:errorclass="error">
 						</p>
 					</div>
 
@@ -56,7 +51,9 @@
 						<div class="input-group-append">
 							<span class="input-group-text">.00</span>
 						</div>
+						<br>
 					</div>
+					<p class="alert alert-danger" th:if="${#fields.hasErrors('valPremiacao')}" th:errors="*{valPremiacao}" th:errorclass="error"></p>
 
 					<button type="submit" class="btn btn-success">Cadastrar Sorteio</button>
 				</div>

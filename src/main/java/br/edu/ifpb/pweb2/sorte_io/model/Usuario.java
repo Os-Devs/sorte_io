@@ -22,6 +22,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -71,6 +72,7 @@ public abstract class Usuario implements Serializable {
 	@JoinColumn(
 		name = "username"
 	)
+	@ToString.Exclude
     private User user;
    
 }

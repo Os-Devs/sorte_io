@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Apostador;
 
-public interface ApostadoresRepository extends JpaRepository<Apostador, Long> {
+public interface ApostadoresRepository extends JpaRepository<Apostador, Integer> {
 
 	@Query("SELECT A FROM Apostador A JOIN FETCH A.user U WHERE U.username = :USERNAME")
 	Optional<Apostador> findByUser(@Param("USERNAME") String username);
