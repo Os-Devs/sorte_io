@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
@@ -68,10 +67,6 @@ public abstract class Usuario implements Serializable {
 	private String senha;
 
     @OneToOne
-    @JoinColumn(
-		name = "username",
-		referencedColumnName = "username"
-	)
     private User user;
    
 }
