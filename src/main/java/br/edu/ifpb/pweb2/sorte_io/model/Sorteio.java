@@ -41,7 +41,7 @@ public class Sorteio {
 	private Integer id;
 
 	@DateTimeFormat(
-		pattern = "dd/MM/yyyy HH:mm"
+		pattern = "yyyy-MM-dd'T'HH:mm:ss"
 	)
 	@Future(
 		message = "A realização precisa ser numa data futura"

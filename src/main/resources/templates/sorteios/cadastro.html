@@ -14,9 +14,45 @@
 </header>
 <body class="bg-dark text-white">
 
-	<div class="container mt-5 mx-auto text-center">
-		<h1>Cadastro Sorteio</h1>
+	<div class="container mt-4">
 		<div class="d-flex justify-content-center">
+
+			<div th:text="${Teste}"></div>
+
+			<form th:action="@{/sorteios}" method="post" th:object="${sorteio}">
+				
+				<input type="hidden" th:field="*{id}">
+
+				<div class="container">
+					<div class="text-end invisible">
+						<a class="text-center btn btn-success btn-lg" >Escondido</a>
+					</div> 
+	
+					<h1 class="display-3 text-center text-white pb-2">Cadastro Sorteios</h1>
+					<p class="lead text-center">Escolha de 6 a 10 números para cadastrar um sorteio</p>
+					<div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
+						<input type="checkbox" th:value="${n}" class="btn-check" th:id="${n}" th:name="checkboxes" autocomplete="off">
+						<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:text="${n}"></label>
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<div class="md-3 mb-3">
+						<label for="dtNascimento" class="form-label">Data de Realização</label>
+						<input type="datetime-local" th:field="*{dtRealizacao}" class="form-control" id="dt_Realizacao"><br>
+						<p
+								class="alert alert-danger"
+								th:if="${#fields.hasErrors('dtRealizacao')}"
+								th:errors="*{dtRealizacao}"
+								th:errorclass="error">
+						</p>
+					</div>
+
+					<button type="submit" class="btn btn-success">Cadastrar Sorteio</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 			<!-- <form th:action="@{/controladores}" method="post" th:object="${controlador}">
 				<input type="hidden" th:field="*{id}">
