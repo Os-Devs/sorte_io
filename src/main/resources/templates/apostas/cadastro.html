@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+		lang="en"
+		xmlns="www.thymeleaf.org"
+>
+<head>
+	<div th:replace="~{fragments/bootstrap.html :: header}"></div>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+	<title>Sorte.io - Apostas - Cadastro</title>
+</head>
+<header sec:authorize="isAuthenticated()">
+	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
+</header>
+<body class="bg-dark text-white">
+	<div class="container mt-4">
+		<div class="d-flex justify-content-center">
+
+			<form th:action="@{/aposta}" method="post" th:object="${aposta}">
+				
+				<input type="hidden" th:field="*{id}">
+
+				<div class="container">
+					<div class="text-end invisible">
+						<a class="text-center btn btn-success btn-lg" >Escondido</a>
+					</div> 
+	
+					<h1 class="display-3 text-center text-white pb-2">Cadastro Apostas</h1>
+					<p class="lead text-center">Escolha de 6 a 10 números para apostar</p>
+					<div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
+						<input type="checkbox" th:value="${n}" class="btn-check" th:id="${n}" th:name="checkboxes" autocomplete="off">
+						<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:text="${n}"></label>
+					</div>
+				</div>
+
+				<!-- <div class="form-floating">
+					<select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+						<option selected></option>
+						<option  value="1">1</option>
+					</select>
+					<label for="floatingSelect">Apostas Favoritas</label>
+				</div> -->
+
+				<div class="form-check form-switch">
+					<input th:field="*{favorito}" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+					<label class="form-check-label" for="flexSwitchCheckDefault">Favorito?</label>
+				</div>
+				
+				<button type="submit" class="btn btn-success">Cadastrar Aposta</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

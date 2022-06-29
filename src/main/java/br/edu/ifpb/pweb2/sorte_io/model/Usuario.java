@@ -18,6 +18,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +39,9 @@ public abstract class Usuario implements Serializable {
 	)
 	private String nome;
 
+	@CPF
 	private String cpf;
+
 	@DateTimeFormat(
 		pattern = "yyyy-MM-dd"
 	)

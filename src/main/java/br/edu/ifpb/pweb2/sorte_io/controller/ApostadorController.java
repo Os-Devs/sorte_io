@@ -20,6 +20,7 @@ import br.edu.ifpb.pweb2.sorte_io.model.Authority.AuthorityId;
 import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.AuthorityRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.UserRepository;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/apostadores")
@@ -44,7 +45,7 @@ public class ApostadorController {
 
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model) {
+	public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model, RedirectAttributes flash) {
 		if (validation.hasErrors()) {
 			model.setViewName("apostador/formApostador");
 			return model;
@@ -56,7 +57,9 @@ public class ApostadorController {
 			apostador.setUser(user);
 
 			apostadoresRepository.save(apostador);
-			model.setViewName("auth/login");
+
+			model.setViewName("redirect:login");
+			flash.addFlashAttribute("mensagem", "Apostador cadastrado com sucesso!");
 
 			return model;
 		}

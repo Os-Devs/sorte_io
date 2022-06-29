@@ -12,3 +12,8 @@ video {
 #navbarDropdown {
 	color: white;
 }
+
+.aposta-checkbox {
+	min-width: 3rem;
+	margin: 1rem;
+}
