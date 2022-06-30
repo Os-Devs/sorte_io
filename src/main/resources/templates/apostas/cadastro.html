@@ -14,12 +14,8 @@
 </header>
 <body class="bg-dark text-white">
 	<div class="container mt-4">
+		<div th:text="${alerta}"></div>
 		<div class="d-flex justify-content-center">
-
-			<div th:text="${Teste}">
-				
-			</div>
-
 			<form th:action="@{/apostas}" method="post" th:object="${aposta}">
 				
 				<input type="hidden" th:field="*{id}">
@@ -31,10 +27,18 @@
 	
 					<h1 class="display-3 text-center text-white pb-2">Cadastro Apostas</h1>
 					<p class="lead text-center">Escolha de 6 a 10 números para cadastrar uma aposta</p>
-					<div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
+					<div class="form-check form-check-inline" th:each=" n : ${#numbers.sequence(1, 60)}">
 						<input type="checkbox" th:value="${n}" class="btn-check" th:id="${n}" th:name="checkboxes" autocomplete="off">
 						<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:text="${n}"></label>
 					</div>
+				</div>
+
+				<div class="form-floating">
+					<select th:field="*{numSorteio}" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+						<option th:each="s : ${sorteiosAbertos}" th:value="${s.id}" th:text="${s.criadoPor.nome} + ' ' + ${s.valPremiacao}" th:selected="${s.id==numSorteio}">
+						</option>
+					</select>
+					<label for="floatingSelect" class="text-dark">Sorteios abertos</label>
 				</div>
 
 				<!-- <div class="form-floating">
