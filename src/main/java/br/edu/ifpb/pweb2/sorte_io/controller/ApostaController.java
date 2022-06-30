@@ -82,8 +82,6 @@ public class ApostaController {
 				Apostador apostador = apostadoresRepository.findByUser(auth.getName()).get();
 				Sorteio sorteio = sorteiosRepository.getById(aposta.getNumSorteio());
 
-				System.out.println(aposta.getNumSorteio());
-
 				aposta.setApostador(apostador);
 				aposta.setNumSelecionados(values);
 				aposta.setSorteio(sorteio);
