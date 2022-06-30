@@ -12,4 +12,8 @@ public interface SorteiosRepository extends JpaRepository<Sorteio, Integer> {
 
 	@Query("SELECT S FROM Sorteio S WHERE S.dtRealizacao > CURRENT_TIMESTAMP")
 	Optional<List<Sorteio>> findBySorteiosNaoRealizados();
+
+	@Query("SELECT S FROM Sorteio S WHERE S.dtRealizacao < CURRENT_TIMESTAMP")
+	Optional<List<Sorteio>> findBySorteiosRealizados();
+	
 }

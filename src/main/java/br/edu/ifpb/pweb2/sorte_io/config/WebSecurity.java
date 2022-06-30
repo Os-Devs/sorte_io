@@ -24,6 +24,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .antMatchers("/apostadores/form", "/controladores/form", "/apostadores", "/controladores",  
                                         "/css/**", "/images/**", "/videos/**").permitAll()
             .antMatchers("/sorteios/**").hasRole("CONTROLLER")
+            .antMatchers("/apostas/**").hasRole("USER")
             .anyRequest()
             .authenticated()
             .and()
@@ -44,7 +45,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
             .passwordEncoder(encoder)
-/*             .withUser(
+            /*.withUser(
                 User.builder().username("controlador").password(encoder.encode("controlador123")).roles("CONTROLLER").build()
             )
             .withUser(

@@ -12,4 +12,6 @@ public interface ControladoresRepository extends JpaRepository<Controlador, Inte
 
     @Query("SELECT C FROM Controlador C JOIN FETCH C.user U WHERE U.username = :USERNAME")
 	Optional<Controlador> findByUser(@Param("USERNAME") String username);
+
+    
 }

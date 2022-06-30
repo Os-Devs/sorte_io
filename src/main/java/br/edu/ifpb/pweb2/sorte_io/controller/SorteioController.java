@@ -44,13 +44,6 @@ public class SorteioController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView cadastroSorteio(Sorteio sorteio, ModelAndView model) {
-		/* List<Integer> numeros = new ArrayList<>();
-
-		for (int i = 0; i < 60; i++) {
-			numeros.add(i + 1);
-		}
-		
-		model.addObject("numerosSort", numeros); */
 		model.addObject("sorteio", sorteio);
 		model.setViewName("sorteios/cadastro");
 
@@ -85,6 +78,7 @@ public class SorteioController {
 						Controlador criador = controladoresRepository.findByUser(auth.getName()).get();
 
 						sorteio.setCriadoPor(criador);
+						criador.getSorteios().add(sorteio);
 
 						sorteiosRepository.save(sorteio);
 					}

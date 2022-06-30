@@ -20,15 +20,22 @@
 							</a>
 							<ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
 								<li >
-									<a class="dropdown-item" aria-current="page" th:href="@{/home}" >Home</a>
+									<a class="dropdown-item" aria-current="page" th:href="@{/home}"><i class="bi bi-house"></i> Home</a>
+									<hr class="dropdown-divider">
 								</li>
-								<hr class="dropdown-divider">
-								<li >
-									<a class="dropdown-item" aria-current="page" th:href="@{/sorteios/sorteio}">Sorteios</a>
+								<li sec:authorize="hasRole('CONTROLLER')">
+									<a class="dropdown-item" aria-current="page" th:href="@{/sorteios}"><i class="bi bi-currency-dollar"></i> Criar Sorteio</a>
+									<hr class="dropdown-divider">
 								</li>
-								<hr class="dropdown-divider">
-								<li >
-									<a class="dropdown-item" aria-current="page" th:href="@{/apostas/aposta}">Apostas</a>
+								<li sec:authorize="hasRole('CONTROLLER')">
+									<a class="dropdown-item" aria-current="page" th:href="@{/sorteios/sorteio}"><i class="bi bi-piggy-bank"></i> Meus Sorteios</a>
+								</li>
+								<li sec:authorize="hasRole('USER')">
+									<a class="dropdown-item" aria-current="page" th:href="@{/apostas}"><i class="bi bi-receipt-cutoff"></i> Criar Aposta</a>
+									<hr class="dropdown-divider">
+								</li>
+								<li sec:authorize="hasRole('USER')">
+									<a class="dropdown-item" th:href="@{/apostas/aposta}"><i class="bi bi-wallet2"></i> Minhas Apostas</a>
 								</li>
 							</ul>
 						</li>
@@ -45,12 +52,6 @@
 								<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-								<li>
-									<a class="dropdown-item" href="#"><i class="bi bi-coin"></i> Minhas Apostas</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
 								<a class="dropdown-item" href="#" onclick="document.querySelector('#form-login').submit()" sec:authorize="isAuthenticated()">
 									<i class="bi bi-box-arrow-right"></i> Logout
 								</a>
