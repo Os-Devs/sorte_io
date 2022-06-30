@@ -25,17 +25,17 @@
 
 ---
 ## Tabela de Requisitos:
-> Item/Pontos [ ✔️ | ❌ ]
+> Item/Pontos [ ✔️ | 〰 | ❌ ]
 
     [✔️] | 05 | Implementou cadastro de clientes
 
     [✔️] | 05 | Implementou o login/logoutde clientes e filtro de autenticação
 
-    [❌] | 15 | Implementou a realização de aposta por cliente
+    [✔️] | 15 | Implementou a realização de aposta por cliente
 
-    [❌] | 15 | Implementou a realização de sorteio por controlador
+    [〰] | 15 | Implementou a realização de sorteio por controlador
 
-    [❌] | 15 | Implementou a conferência das apostas em um sorteio
+    [〰] | 15 | Implementou a conferência das apostas em um sorteio
 
     [❌] | 15 | Implementou as apostas preferidas de um cliente
 
@@ -45,10 +45,11 @@
 
     [✔️] | 05 | Formulários validam valores de campos e mostram mensagens de erros
 
-    [❌] | 05 | Usou Post-Redirect-Get
+    [〰] | 05 | Usou Post-Redirect-Get
 
     [✔️] | 05 | Utilizou fragmentos nos templates Thymeleaf
 
-> ATUAL  35
+---
 
-> TOTAL 100
+    TOTAL 100 pontos
+    ATUAL  50 pontos

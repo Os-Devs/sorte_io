@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
@@ -21,6 +22,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -67,6 +69,10 @@ public abstract class Usuario implements Serializable {
 	private String senha;
 
     @OneToOne
+	@JoinColumn(
+		name = "username"
+	)
+	@ToString.Exclude
     private User user;
    
 }

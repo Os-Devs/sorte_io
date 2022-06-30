@@ -1,8 +1,8 @@
 package br.edu.ifpb.pweb2.sorte_io.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -14,14 +14,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,22 +42,25 @@ public class Sorteio {
 	private Integer id;
 
 	@DateTimeFormat(
-		pattern = "yyyy-MM-dd'T'HH:mm:ss"
+		pattern = "yyyy-MM-dd'T'HH:mm"
+	)
+	@NotNull(
+		message = "Campo é obrigatório!"
 	)
 	@Future(
 		message = "A realização precisa ser numa data futura"
 	)
-	private LocalDateTime dtRealizacao;
+	private Date dtRealizacao;
 	
 	@ElementCollection
 	private Set<String> numSorteados;
 
-	@NumberFormat(
-		pattern = "###.###,##"
+	@NotNull(
+		message = "Campo é obrigatório!"
 	)
 	private BigDecimal valPremiacao;
 
-	@OneToOne
+	@ManyToOne
 	private Controlador criadoPor;
 
 	@OneToMany(
@@ -85,10 +88,6 @@ public class Sorteio {
 
 			this.numSorteados.add(nSorteado.toString());
 		}
-	}
-
-	public void sortear(Set<String> manual) {
-		this.numSorteados = manual;
 	}
 	
 	public void testarVencedores() {

@@ -3,6 +3,7 @@ package br.edu.ifpb.pweb2.sorte_io.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -21,9 +22,9 @@ public class Apostador extends Usuario {
 	
 	private BigDecimal saldo = BigDecimal.ZERO;
 
-	@OneToMany
-	@JoinColumn(
-		name = "id_aposta"
+	@OneToMany(
+		mappedBy = "apostador",
+		cascade = CascadeType.ALL
 	)
 	private List<Aposta> apostas;
 }
