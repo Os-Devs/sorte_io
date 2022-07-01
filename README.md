@@ -37,7 +37,7 @@
 
     [〰] | 15 | Implementou a conferência das apostas em um sorteio
 
-    [❌] | 15 | Implementou as apostas preferidas de um cliente
+    [✔️] | 15 | Implementou as apostas preferidas de um cliente
 
     [✔️] | 10 | Implementou autorização via Spring Secutiry
 
@@ -45,7 +45,7 @@
 
     [✔️] | 05 | Formulários validam valores de campos e mostram mensagens de erros
 
-    [〰] | 05 | Usou Post-Redirect-Get
+    [✔️] | 05 | Usou Post-Redirect-Get
 
     [✔️] | 05 | Utilizou fragmentos nos templates Thymeleaf
 

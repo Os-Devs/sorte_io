@@ -21,6 +21,38 @@
 		</div>
 		
 		<div th:replace="~{fragments/tabela-precos.html :: tabela-precos}"></div>
+
+		<div class="container mt-4 text-center">
+			<p class="lead text-center">Sorteios Ativos</p>
+			<div class="d-flex flex-grow-1 flex-wrap justify-content-evenly text-center px-3 py-2 gap-3">
+				<div th:each="sa : ${sorteiosAbertos}" class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient ">
+					<div class="card-body text-white border-secondary">
+						<h5 th:inline="text" class="card-title">
+							Sorteio de R$ [[${#numbers.formatDecimal(sa.valPremiacao, 0, 'POINT', 2, 'COMMA')}]]
+						</h5>
+						<p th:inline="text" class="card-text">
+							Data de realização: [[${#dates.format(sa.dtRealizacao, 'dd/MM/yyyy HH:mm')}]]
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container mt-4 text-center">
+			<p class="lead text-center">Sorteios Fechados</p>
+			<div class="d-flex flex-grow-1 flex-wrap justify-content-evenly text-center px-3 py-2 gap-3">
+				<div th:each="sf : ${sorteiosFechados}" class="card border border-danger rounded-pill border-3 h-100 my-2 flex-grow-1 bg-danger bg-gradient ">
+					<div class="card-body text-white border-secondary">
+						<h5 th:inline="text" class="card-title">
+							Sorteio de R$ [[${#numbers.formatDecimal(sf.valPremiacao, 0, 'POINT', 2, 'COMMA')}]]
+						</h5>
+						<p th:inline="text" class="card-text">
+							Data de realização: [[${#dates.format(sf.dtRealizacao, 'dd/MM/yyyy HH:mm')}]]
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		<div th:replace="~{fragments/footer.html :: footer}"></div>
 

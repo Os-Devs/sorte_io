@@ -44,14 +44,14 @@
 
 				<div class="md-3 mb-3">
 					<label for="username" class="form-label">Username:</label>
-					<input type="text" th:field="*{nick}" class="form-control" id="nick" name="username"><br>
-					<p class="alert alert-danger" th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}" th:errorclass="error"></p>
+					<input type="text" th:name="nick" class="form-control" id="nick" required><br>
+					<!-- <p class="alert alert-danger" th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}" th:errorclass="error"></p> -->
 				</div>
 
 				<div class="md-4 mb-3">
 					<label for="exampleInputPassword" class="form-label">Senha:</label>
-					<input type="password" th:field="*{senha}" class="form-control" id="senha" name="password"><br>
-					<p class="alert alert-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" th:errorclass="error"></p>
+					<input type="password" th:name="senha" class="form-control" id="senha" required><br>
+					<!-- <p class="alert alert-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" th:errorclass="error"></p> -->
 				</div>
 
 				<hr>

@@ -13,19 +13,18 @@
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
 <body class="bg-dark text-white">
-	<div class="container mt-4 text-center">
-		<div class="text-end">
-			<a class="text-center btn btn-success btn-lg" th:href="@{/apostas/cadastro}">
-				Cadastro Apostas
-			</a>
-		</div>
-		<h1 class="display-3 text-center text-white pb-2">Apostas</h1>
-
+	<div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<span th:text="${sucesso}"></span>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
-
-	<!-- <div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
-		<input class="form-check-input" type="checkbox" th:value="${n}" th:text="' ' + ${n}">
-	</div> -->
+	<div class="container mt-4 text-center">
+		<h1 class="display-3 text-white pb-2">Minhas Apostas</h1>
+		<div th:each="a : ${minhasApostas}">
+			<p th:inline="text">
+				Sorteio: [[${a.sorteio.id}]], Números selecionados: [[${a.numSelecionados}]]
+			</p>
+		</div>
+	</div>
 	
 	<div class="fixed-bottom">
 		<div th:replace="~{fragments/footer.html :: footer}"></div>

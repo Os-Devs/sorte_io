@@ -1,13 +1,7 @@
 package br.edu.ifpb.pweb2.sorte_io.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +14,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifpb.pweb2.sorte_io.model.Controlador;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
-import br.edu.ifpb.pweb2.sorte_io.repository.ControladoresRepository;
-import br.edu.ifpb.pweb2.sorte_io.repository.SorteiosRepository;
+import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 
 @Controller
 @RequestMapping("/sorteios")
 public class SorteioController {
 
 	@Autowired
-	SorteiosRepository sorteiosRepository;
-
-	@Autowired
-	ControladoresRepository controladoresRepository;
+	SorteioImp sorteioService;
 
 	@RequestMapping("/sorteio")
-	public ModelAndView sorteio(ModelAndView model) {
+	public ModelAndView sorteio(ModelAndView model, Principal auth) {
+		model.addObject("meusSorteios", sorteioService.sorteiosForUser(auth.getName()));
 		model.setViewName("sorteios/sorteio");
 
 		return model;
@@ -44,13 +34,6 @@ public class SorteioController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView cadastroSorteio(Sorteio sorteio, ModelAndView model) {
-		/* List<Integer> numeros = new ArrayList<>();
-
-		for (int i = 0; i < 60; i++) {
-			numeros.add(i + 1);
-		}
-		
-		model.addObject("numerosSort", numeros); */
 		model.addObject("sorteio", sorteio);
 		model.setViewName("sorteios/cadastro");
 
@@ -59,7 +42,6 @@ public class SorteioController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	@Transactional
 	public ModelAndView save(@Valid Sorteio sorteio, BindingResult validation, @RequestParam(name = "checkboxes", required = false) String value, 
 							 ModelAndView model, Principal auth, RedirectAttributes flash) {
 
@@ -69,34 +51,15 @@ public class SorteioController {
 			return model;
 		}
 		else {
-			if(value != null) {
-				Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
+			boolean valid = this.sorteioService.createSorteio(value, sorteio, auth.getName());
 
-				if(values.size() < 6 || values.size() > 6) {
-					model.setViewName("redirect:sorteios");
-					flash.addFlashAttribute("mensagem", "Só poderar cadastrar 6 números no sorteio");
-
-					return model;
-				}
-				else {
-					sorteio.setNumSorteados(values);
-
-					if(controladoresRepository.findByUser(auth.getName()).isPresent()) {
-						Controlador criador = controladoresRepository.findByUser(auth.getName()).get();
-
-						sorteio.setCriadoPor(criador);
-
-						sorteiosRepository.save(sorteio);
-					}
-
-					model.setViewName("/home");
-
-					return model;
-				}
+			if(valid) {
+				model.setViewName("redirect:home");
 			}
-
-			model.setViewName("redirect:sorteios");
-			flash.addFlashAttribute("mensagem", "Campo é obrigatório");
+			else {
+				model.setViewName("redirect:sorteios");
+				flash.addFlashAttribute("alerta", "Só poderar cadastrar 6 números no sorteio");
+			}
 
 			return model;
 			
