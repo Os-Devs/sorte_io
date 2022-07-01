@@ -2,30 +2,56 @@
 > Bem vindo ao Sorte.io sua plataforma de apostas, entre com 
   com permissões diferentes e navegue no nosso sistema enquanto 
   ainda dispor de 2 coisas essenciais... 
-  Sorte e Dinheiro ;) 
-
-## Usuarios
+  Sorte e Dinheiro ;)
 
 ---
 
-### Criador de Sorteios
+## Subindo Banco via Docker
+> É necessário a instalação do [Docker](https://docs.docker.com/get-docker/) e [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
-    Username:
-        controlador
-    Password:
-        controlador123
+Na raiz do diretório, navegue para a pasta [**`docker`**](./docker/), em seguida execute o comando [**`docker-compose up`**](./docker/docker-compose.yml)
+
+    cd ./docker
+    docker-compose up -d
+
+- **MySQL** irá subir na porta **`3306`**
+- [**phpMyAdmin**](http:localhost:80) irá subir na url **`80`**
+    - user: **`root`**
+    - password: **`ifpb`**
+
+## Executando a aplicação
+> É necessário executar [**`SorteIoApplication`**](/src/main/java/br/edu/ifpb/pweb2/sorte_io/SorteIoApplication.java)
+
+- Será criado as tabelas necessárias no 
+- **Tomcat** irá subir na porta **`8080`**
+- A aplicação foi mapeada para iniciar na url [**`localhost:8080/sorte_io/`**](http:localhost:8080/sorte_io/)
+
+
+## Finalizar aplicação
+> É necessário para a execução de [**`SorteIoApplication`**](/src/main/java/br/edu/ifpb/pweb2/sorte_io/SorteIoApplication.java)
+
+Em seguida execute o comando [**`docker-compose down`**](./docker/docker-compose.yml)
+
+    docker-compose down
+
+- **MySQL** e **phpMyAdmin** irão
+
+Caso seja necessário remover o banco
 
 ---
-### Apostador
 
-    Username:
-        apostador
-    Password:
-        apostador123
+<!-- ## Usuarios
 
----
+- Criador de Sorteios
+    - Username: `controlador`
+    - Password: `controlador123`
+
+- Apostador
+    - Username: `apostador`
+    - Password: `apostador123` -->
+
 ## Tabela de Requisitos:
-> Item/Pontos [ ✔️ | 〰 | ❌ ]
+[ ✔️  〰  ❌ ] | Pontos | Item |
 
     [✔️] | 05 | Implementou cadastro de clientes
 
@@ -52,4 +78,5 @@
 ---
 
     TOTAL 100 pontos
-    ATUAL  50 pontos
+    ATUAL  70 pontos
+

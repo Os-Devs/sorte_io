@@ -3,6 +3,7 @@ package br.edu.ifpb.pweb2.sorte_io.services.aposta.imp;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -117,6 +118,16 @@ public class ApostaImp implements ApostaService {
             default:
                 return BigDecimal.valueOf(3);
         }
+    }
+
+    @Override
+    public List<Aposta> findByUser(String username) {
+        return apostasRepository.findByForUser(username).get();
+    }
+
+    @Override
+    public List<Aposta> findFavoritos(String username) {
+        return apostasRepository.findByFavoritoTrueForUser(username).get();
     }
     
 }

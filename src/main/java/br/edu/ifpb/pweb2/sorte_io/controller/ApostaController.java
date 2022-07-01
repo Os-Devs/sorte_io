@@ -10,18 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-// import java.util.Arrays;
-// import java.util.HashSet;
-// import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
-import br.edu.ifpb.pweb2.sorte_io.repository.ApostasRepository;
-import br.edu.ifpb.pweb2.sorte_io.repository.SorteiosRepository;
 import br.edu.ifpb.pweb2.sorte_io.services.aposta.imp.ApostaImp;
+import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 import br.edu.ifpb.pweb2.sorte_io.model.Aposta;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
 
@@ -33,17 +27,13 @@ public class ApostaController {
 	ApostaImp apostaService;
 
 	@Autowired
-	ApostasRepository apostasRepository;
-
-	@Autowired
-	SorteiosRepository sorteiosRepository;
-
-	@Autowired
-	ApostadoresRepository apostadoresRepository;
+	SorteioImp sorteioService;
 
 	@RequestMapping("/aposta")
 	public ModelAndView aposta(ModelAndView model, Principal auth) {
-		model.addObject("minhasApostas", apostasRepository.findByForUser(auth.getName()).get());
+		model.addObject("apostasGanhadas", apostaService.findByUser(auth.getName()));
+		model.addObject("apostasPerdidas", apostaService.findByUser(auth.getName()));
+
 		model.setViewName("apostas/aposta");
 
 		return model;
@@ -53,8 +43,8 @@ public class ApostaController {
 	public ModelAndView cadastroAposta(Aposta aposta, ModelAndView model, Principal auth) {
 		model.addObject("defaultAposta", new Aposta());
 		model.addObject("defaultSorteio", new Sorteio());
-		model.addObject("apostasFavoritas", apostasRepository.findByFavoritoTrueForUser(auth.getName()).get());
-		model.addObject("sorteiosAbertos", sorteiosRepository.findBySorteiosNaoRealizados().get());
+		model.addObject("apostasFavoritas", apostaService.findFavoritos(auth.getName()));
+		model.addObject("sorteiosAbertos", sorteioService.sorteiosAbertos());
 		model.addObject("aposta", aposta);
 		model.setViewName("apostas/cadastro");
 
