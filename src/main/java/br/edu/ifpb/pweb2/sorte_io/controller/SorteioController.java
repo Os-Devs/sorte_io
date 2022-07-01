@@ -54,7 +54,8 @@ public class SorteioController {
 			boolean valid = this.sorteioService.createSorteio(value, sorteio, auth.getName());
 
 			if(valid) {
-				model.setViewName("redirect:home");
+				model.setViewName("redirect:sorteios/sorteio");
+				flash.addFlashAttribute("sucesso", "Sorteio cadastrado com sucesso!");
 			}
 			else {
 				model.setViewName("redirect:sorteios");
