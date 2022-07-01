@@ -18,6 +18,10 @@ public class HomeController {
 		if(sorteiosRepository.findBySorteiosNaoRealizados().isPresent()) {
 			model.addObject("sorteiosAbertos", sorteiosRepository.findBySorteiosNaoRealizados().get());
 		}
+
+		if(sorteiosRepository.findBySorteiosRealizados().isPresent()) {
+			model.addObject("sorteiosFechados", sorteiosRepository.findBySorteiosRealizados().get());
+		}
 		
 		model.setViewName("/home");
         return model;

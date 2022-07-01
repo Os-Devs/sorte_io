@@ -34,7 +34,8 @@ public class SorteioController {
 	ControladoresRepository controladoresRepository;
 
 	@RequestMapping("/sorteio")
-	public ModelAndView sorteio(ModelAndView model) {
+	public ModelAndView sorteio(ModelAndView model, Principal auth) {
+		model.addObject("meusSorteios", sorteiosRepository.findBySorteiosForUser(auth.getName()).get());
 		model.setViewName("sorteios/sorteio");
 
 		return model;
@@ -82,7 +83,7 @@ public class SorteioController {
 						controladoresRepository.save(criador);
 					}
 
-					model.setViewName("/home");
+					model.setViewName("redirect:home");
 
 					return model;
 				}

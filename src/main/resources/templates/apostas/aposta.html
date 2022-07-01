@@ -13,6 +13,10 @@
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
 <body class="bg-dark text-white">
+	<div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<span th:text="${sucesso}"></span>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
 	<div class="container mt-4 text-center">
 		<div class="text-end">
 			<a class="text-center btn btn-success btn-lg" th:href="@{/apostas}">
@@ -24,10 +28,12 @@
 	</div>
 
 	<div th:each="a : ${minhasApostas}">
-		<p th:text="${a.numSelecionados}"></p>
+		<p th:inline="text">
+			Sorteio: [[${a.sorteio.id}]], Números selecionados: [[${a.numSelecionados}]]
+		</p>
 	</div>
 	
-	<div class="fixed-bottom">
+	<div>
 		<div th:replace="~{fragments/footer.html :: footer}"></div>
 	</div>
 

@@ -45,7 +45,7 @@
 
     [✔️] | 05 | Formulários validam valores de campos e mostram mensagens de erros
 
-    [〰] | 05 | Usou Post-Redirect-Get
+    [✔️] | 05 | Usou Post-Redirect-Get
 
     [✔️] | 05 | Utilizou fragmentos nos templates Thymeleaf
 

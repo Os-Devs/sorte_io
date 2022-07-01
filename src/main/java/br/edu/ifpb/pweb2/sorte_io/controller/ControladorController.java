@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Controlador;
 import br.edu.ifpb.pweb2.sorte_io.model.Authority;
@@ -43,7 +44,7 @@ public class ControladorController {
 
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(@Valid Controlador controlador, BindingResult validation, ModelAndView model) {
+	public ModelAndView save(@Valid Controlador controlador, BindingResult validation, ModelAndView model, RedirectAttributes flash) {
 		if (validation.hasErrors()) {
 			model.setViewName("controlador/formControlador");
 			return model;
@@ -55,7 +56,9 @@ public class ControladorController {
 			controlador.setUser(user);
 
 			controladoresRepository.save(controlador);
-			model.setViewName("auth/login");
+
+			model.setViewName("redirect:login");
+			flash.addFlashAttribute("mensagem", "Controlador cadastrado com sucesso!");
 
 			return model;
 		}

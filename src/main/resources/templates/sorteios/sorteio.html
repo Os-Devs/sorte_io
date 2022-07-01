@@ -14,47 +14,16 @@
 </header>
 <body class="bg-dark text-white">
 	<div class="container mt-4 text-center">
-		<div class="text-end">
-			<a class="text-center btn btn-success btn-lg" th:href="@{/sorteios/cadastro}">
-				Cadastro Sorteios
-			</a>
-		</div>
-		<h1 class="display-3 text-center text-white pb-2">Sorteios</h1>
-		<p class="lead text-center">Sorteios Ativos</p>
-		<div class="d-flex flex-grow-1 flex-wrap justify-content-evenly text-center px-3 py-2 gap-3">
-			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient ">
-				<div class="card-body text-white border-secondary">
-					<h5 class="card-title">Sorteio 1</h5>
-					<p class="card-text"> Descrição do sorteio</p>
-				</div>
-			</div>
-			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient">
-				<div class="card-body text-white border-secondary">
-					<h5 class="card-title">Sorteio 2</h5>
-					<p class="card-text"> Descrição do sorteio</p>
-				</div>
-			</div>
-			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient">
-				<div class="card-body text-white border-secondary">
-					<h5 class="card-title">Sorteio 3</h5>
-					<p class="card-text"> Descrição do sorteio</p>
-				</div>
-			</div>
-			<div class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient">
-				<div class="card-body text-white border-secondary">
-					<h5 class="card-title">Sorteio 4</h5>
-					<p class="card-text"> Descrição do sorteio</p>
-				</div>
-			</div>
-			<div class="card border border-success rounded-pill border-3 h-100 m-2 flex-grow-1  bg-success bg-gradient">
-				<div class="card-body text-white border-secondary">
-					<h5 class="card-title">Sorteio 5</h5>
-					<p class="card-text"> Descrição do sorteio</p>
-				</div>
-			</div>
+		<h1>Meus Sorteios</h1>
+		<br>
+		
+		<div th:each="s : ${meusSorteios}" th:inline="text">
+			<p th:inline="text">
+				[[${s.valPremiacao}]] - Quantidade de participantes [[${s.apostas.size()}]]
+				
+			</p>
 		</div>
 	</div>
-
 	<div class="fixed-bottom">
 		<div th:replace="~{fragments/footer.html :: footer}"></div>
 	</div>

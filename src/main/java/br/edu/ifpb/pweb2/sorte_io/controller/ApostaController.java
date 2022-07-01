@@ -48,8 +48,10 @@ public class ApostaController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView cadastroAposta(Aposta aposta, ModelAndView model, Principal auth) {
+		model.addObject("defaultAposta", new Aposta());
+		model.addObject("defaultSorteio", new Sorteio());
 		model.addObject("apostasFavoritas", apostasRepository.findByFavoritoTrueForUser(auth.getName()).get());
-		model.addObject("sorteiosAbertos", sorteiosRepository.findBySorteiosNaoRealizados().get());
+		model.addObject("sorteiosAbertos", sorteiosRepository.findAll()); // findBySorteiosNaoRealizados().get()
 		model.addObject("aposta", aposta);
 		model.setViewName("apostas/cadastro");
 
@@ -63,31 +65,36 @@ public class ApostaController {
 							 ModelAndView model, Principal auth, RedirectAttributes flash) {
 
 		if(aposta.getNumSelecionados().isEmpty() || aposta.getNumSelecionados() == null) {
-			Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
+			try {
+				Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
 
-			if(values.size() < 6 || values.size() > 10) {
-				model.setViewName("redirect:apostas");
-				flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo");
-	
-				return model;
-			}
-			else {
-				if(apostadoresRepository.findByUser(auth.getName()).isPresent()) {
-					Apostador apostador = apostadoresRepository.findByUser(auth.getName()).get();
-					Sorteio sorteio = sorteiosRepository.getById(aposta.getNumSorteio());
-	
-					aposta.setApostador(apostador);
-					aposta.setNumSelecionados(values);
-					aposta.setSorteio(sorteio);
-	
-					sorteio.add(aposta);
-	
-					apostasRepository.save(aposta);
-					sorteiosRepository.save(sorteio);
-					
+				if(values.size() < 6 || values.size() > 10) {
 					model.setViewName("redirect:apostas");
+					flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo!");
 				}
-				
+				else {
+					if(apostadoresRepository.findByUser(auth.getName()).isPresent()) {
+						Apostador apostador = apostadoresRepository.findByUser(auth.getName()).get();
+						Sorteio sorteio = sorteiosRepository.getById(aposta.getNumSorteio());
+		
+						aposta.setApostador(apostador);
+						aposta.setNumSelecionados(values);
+						aposta.setSorteio(sorteio);
+		
+						sorteio.add(aposta);
+		
+						apostasRepository.save(aposta);
+						sorteiosRepository.save(sorteio);
+						
+						model.setViewName("redirect:apostas/aposta");
+						flash.addFlashAttribute("sucesso", "Aposta cadastrada!");
+					}
+					
+				}
+			}
+			catch(Exception e) {
+				model.setViewName("redirect:apostas");
+				flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo!");
 			}
 		}
 		else {
@@ -117,7 +124,8 @@ public class ApostaController {
 				apostasRepository.save(aposta);
 				sorteiosRepository.save(sorteio);
 				
-				model.setViewName("redirect:apostas");
+				model.setViewName("redirect:apostas/aposta");
+				flash.addFlashAttribute("sucesso", "Aposta cadastrada!");
 			}
 			
 		}
