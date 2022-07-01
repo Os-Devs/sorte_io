@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+// import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,7 +20,8 @@ import lombok.Setter;
 @Table(name = "apostadores")
 public class Apostador extends Usuario {
 	
-	private BigDecimal saldo = BigDecimal.ZERO;
+	private BigDecimal ganhos = BigDecimal.ZERO;
+	private BigDecimal gastos = BigDecimal.ZERO;
 
 	@OneToMany(
 		mappedBy = "apostador",

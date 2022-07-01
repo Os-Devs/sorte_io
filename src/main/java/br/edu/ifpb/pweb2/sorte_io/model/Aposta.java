@@ -42,6 +42,8 @@ public class Aposta {
 	@ManyToOne
 	private Sorteio sorteio;
 
+	private boolean venceu;
+
 	@Transient
 	private Integer numSorteio;
 

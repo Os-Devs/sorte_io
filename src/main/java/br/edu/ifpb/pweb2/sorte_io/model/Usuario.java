@@ -11,11 +11,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+// import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+// import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.hibernate.validator.constraints.br.CPF;
@@ -53,20 +53,6 @@ public abstract class Usuario implements Serializable {
 		message = "Não pode ser uma data futura"
 	)
 	private Date dtNascimento;
-
-	@NotEmpty(message = "Campo é obrigatório")
-	@Transient
-	private String nick;
-
-	@NotEmpty(
-		message = "Campo é obrigatório!"
-	)
-	@Size(
-		min = 8,
-		message = "A senha precisa ter no mínimo 8 caracteres"
-	)
-	@Transient
-	private String senha;
 
     @OneToOne
 	@JoinColumn(

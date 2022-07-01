@@ -18,22 +18,15 @@
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 	<div class="container mt-4 text-center">
-		<div class="text-end">
-			<a class="text-center btn btn-success btn-lg" th:href="@{/apostas}">
-				Cadastro Apostas
-			</a>
+		<h1 class="display-3 text-white pb-2">Minhas Apostas</h1>
+		<div th:each="a : ${minhasApostas}">
+			<p th:inline="text">
+				Sorteio: [[${a.sorteio.id}]], Números selecionados: [[${a.numSelecionados}]]
+			</p>
 		</div>
-		<h1 class="display-3 text-center text-white pb-2">Apostas</h1>
-
-	</div>
-
-	<div th:each="a : ${minhasApostas}">
-		<p th:inline="text">
-			Sorteio: [[${a.sorteio.id}]], Números selecionados: [[${a.numSelecionados}]]
-		</p>
 	</div>
 	
-	<div>
+	<div class="fixed-bottom">
 		<div th:replace="~{fragments/footer.html :: footer}"></div>
 	</div>
 

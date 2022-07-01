@@ -11,10 +11,10 @@ import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
 
 public interface SorteiosRepository extends JpaRepository<Sorteio, Integer> {
 
-	@Query("SELECT S FROM Sorteio S WHERE S.dtRealizacao > CURRENT_TIMESTAMP")
+	@Query("SELECT S FROM Sorteio S WHERE S.realizado = 0")
 	Optional<List<Sorteio>> findBySorteiosNaoRealizados();
 
-	@Query("SELECT S FROM Sorteio S WHERE S.dtRealizacao < CURRENT_TIMESTAMP")
+	@Query("SELECT S FROM Sorteio S WHERE S.realizado = 1")
 	Optional<List<Sorteio>> findBySorteiosRealizados();
 
 	@Query("SELECT S FROM Sorteio S JOIN FETCH S.criadoPor C JOIN FETCH C.user U WHERE U.username = :USERNAME")
