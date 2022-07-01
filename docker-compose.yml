@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.6
+    volumes:
+      - "~/mysql:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: sorteio
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: ifpb
+      MYSQL_USER: ifpb2022
+      MYSQL_PASSWORD: ifpb123
+  app:
+    image: phpmyadmin/phpmyadmin:5.2.0
+    links:
+      - db
+    ports:
+      - 80:80
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
