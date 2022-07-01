@@ -37,7 +37,7 @@
 
     [〰] | 15 | Implementou a conferência das apostas em um sorteio
 
-    [❌] | 15 | Implementou as apostas preferidas de um cliente
+    [✔️] | 15 | Implementou as apostas preferidas de um cliente
 
     [✔️] | 10 | Implementou autorização via Spring Secutiry
 

@@ -23,4 +23,8 @@ public class Controlador extends Usuario {
         cascade = CascadeType.ALL
     )
     private List<Sorteio> sorteios;
+
+    public void add(Sorteio sorteio) {
+        this.sorteios.add(sorteio);
+    }
 }

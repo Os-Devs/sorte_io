@@ -79,6 +79,10 @@ public class Sorteio {
 	@Transient
 	private Set<Integer> auxSet;
 
+
+	public void add(Aposta aposta) {
+		this.apostas.add(aposta);
+	}
 	
 	public void sortear() {
 		Random gerador = new Random();
@@ -124,12 +128,14 @@ public class Sorteio {
 		}
 	}
 
-	public void distribuirPremiacao() {
+	public List<Aposta> distribuirPremiacao() {
 		BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
 
 		for(Aposta aposta : this.vencedores) {
 			aposta.getApostador().setSaldo(aposta.getApostador().getSaldo().add(valor));
 		}
+
+		return this.vencedores;
 	}
 	
 }

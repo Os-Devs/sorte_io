@@ -1,8 +1,6 @@
 package br.edu.ifpb.pweb2.sorte_io.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,21 +39,16 @@ public class ApostaController {
 	ApostadoresRepository apostadoresRepository;
 
 	@RequestMapping("/aposta")
-	public ModelAndView aposta(ModelAndView model) {
-		List<Integer> numeros = new ArrayList<>();
-
-		for (int i = 0; i < 60; i++) {
-			numeros.add(i + 1);
-		}
-
-		model.addObject("numerosSort", numeros);
+	public ModelAndView aposta(ModelAndView model, Principal auth) {
+		model.addObject("minhasApostas", apostasRepository.findByForUser(auth.getName()).get());
 		model.setViewName("apostas/aposta");
 
 		return model;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView cadastroAposta(Aposta aposta, ModelAndView model) {
+	public ModelAndView cadastroAposta(Aposta aposta, ModelAndView model, Principal auth) {
+		model.addObject("apostasFavoritas", apostasRepository.findByFavoritoTrueForUser(auth.getName()).get());
 		model.addObject("sorteiosAbertos", sorteiosRepository.findBySorteiosNaoRealizados().get());
 		model.addObject("aposta", aposta);
 		model.setViewName("apostas/cadastro");
@@ -66,29 +59,63 @@ public class ApostaController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	@Transactional
-	public ModelAndView save(Aposta aposta, @RequestParam(name = "checkboxes") String value, 
+	public ModelAndView save(Aposta aposta, @RequestParam(name = "checkboxes", required = false) String value, 
 							 ModelAndView model, Principal auth, RedirectAttributes flash) {
 
-		Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
+		if(aposta.getNumSelecionados().isEmpty() || aposta.getNumSelecionados() == null) {
+			Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
 
-		if(values.size() < 6 || values.size() > 10) {
-			model.setViewName("redirect:apostas");
-			flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo");
-
-			return model;
+			if(values.size() < 6 || values.size() > 10) {
+				model.setViewName("redirect:apostas");
+				flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo");
+	
+				return model;
+			}
+			else {
+				if(apostadoresRepository.findByUser(auth.getName()).isPresent()) {
+					Apostador apostador = apostadoresRepository.findByUser(auth.getName()).get();
+					Sorteio sorteio = sorteiosRepository.getById(aposta.getNumSorteio());
+	
+					aposta.setApostador(apostador);
+					aposta.setNumSelecionados(values);
+					aposta.setSorteio(sorteio);
+	
+					sorteio.add(aposta);
+	
+					apostasRepository.save(aposta);
+					sorteiosRepository.save(sorteio);
+					
+					model.setViewName("redirect:apostas");
+				}
+				
+			}
 		}
 		else {
 			if(apostadoresRepository.findByUser(auth.getName()).isPresent()) {
 				Apostador apostador = apostadoresRepository.findByUser(auth.getName()).get();
 				Sorteio sorteio = sorteiosRepository.getById(aposta.getNumSorteio());
+				Set<String> auxFormat = new HashSet<>();
 
+				for (String element : aposta.getNumSelecionados()) {
+					if(element.contains("[")) {
+						auxFormat.add(element.replace("[", ""));
+					}
+					else if(element.contains("]")) {
+						auxFormat.add(element.replace("]", ""));
+					}
+					else {
+						auxFormat.add(element);
+					}
+				}
+
+				aposta.setNumSelecionados(auxFormat);
 				aposta.setApostador(apostador);
-				aposta.setNumSelecionados(values);
 				aposta.setSorteio(sorteio);
 
-				sorteio.getApostas().add(aposta);
+				sorteio.add(aposta);
 
 				apostasRepository.save(aposta);
+				sorteiosRepository.save(sorteio);
 				
 				model.setViewName("redirect:apostas");
 			}

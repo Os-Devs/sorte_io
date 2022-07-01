@@ -44,4 +44,8 @@ public class Aposta {
 
 	@Transient
 	private Integer numSorteio;
+
+	public void add(String value) {
+		this.numSelecionados.add(value);
+	}
 }

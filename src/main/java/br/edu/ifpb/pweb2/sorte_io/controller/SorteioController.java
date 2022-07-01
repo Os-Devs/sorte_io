@@ -1,10 +1,8 @@
 package br.edu.ifpb.pweb2.sorte_io.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -78,9 +76,10 @@ public class SorteioController {
 						Controlador criador = controladoresRepository.findByUser(auth.getName()).get();
 
 						sorteio.setCriadoPor(criador);
-						criador.getSorteios().add(sorteio);
+						criador.add(sorteio);
 
 						sorteiosRepository.save(sorteio);
+						controladoresRepository.save(criador);
 					}
 
 					model.setViewName("/home");

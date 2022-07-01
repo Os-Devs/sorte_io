@@ -23,9 +23,9 @@
 
 	</div>
 
-	<!-- <div class="form-check form-check-inline" th:each=" n : ${numerosSort}">
-		<input class="form-check-input" type="checkbox" th:value="${n}" th:text="' ' + ${n}">
-	</div> -->
+	<div th:each="a : ${minhasApostas}">
+		<p th:text="${a.numSelecionados}"></p>
+	</div>
 	
 	<div class="fixed-bottom">
 		<div th:replace="~{fragments/footer.html :: footer}"></div>
