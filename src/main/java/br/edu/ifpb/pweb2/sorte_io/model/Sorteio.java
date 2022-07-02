@@ -19,9 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-// import javax.validation.constraints.Future;
+import javax.validation.constraints.Future;
 
-// import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +41,15 @@ public class Sorteio {
 	)
 	private Integer id;
 
+	@DateTimeFormat(
+		pattern = "yyyy-MM-dd'T'HH:mm"
+	)
+	@NotNull(
+		message = "Campo é obrigatório!"
+	)
+	@Future(
+		message = "A realização precisa ser numa data futura"
+	)
 	private Date dtRealizacao;
 	
 	@ElementCollection
