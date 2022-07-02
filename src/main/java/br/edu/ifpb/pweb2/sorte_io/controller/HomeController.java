@@ -5,23 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.edu.ifpb.pweb2.sorte_io.repository.SorteiosRepository;
+import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	SorteiosRepository sorteiosRepository;
+	SorteioImp sorteioService;
 	
 	@RequestMapping("/home")
 	public ModelAndView home(ModelAndView model) {
-		if(sorteiosRepository.findBySorteiosNaoRealizados().isPresent()) {
-			model.addObject("sorteiosAbertos", sorteiosRepository.findBySorteiosNaoRealizados().get());
-		}
-
-		if(sorteiosRepository.findBySorteiosRealizados().isPresent()) {
-			model.addObject("sorteiosFechados", sorteiosRepository.findBySorteiosRealizados().get());
-		}
+		model.addObject("sorteiosAbertos", sorteioService.sorteiosAbertos());
+		model.addObject("sorteiosFechados", sorteioService.sorteiosFechados());
 		
 		model.setViewName("/home");
         return model;

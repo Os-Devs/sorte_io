@@ -26,7 +26,7 @@ public class ControladorController {
 	@RequestMapping("/form")
 	public ModelAndView getForm(Controlador controlador, ModelAndView model) {
 		model.addObject("controlador", controlador);
-		model.setViewName("controlador/formControlador");
+		model.setViewName("/controlador/formControlador");
 
 		return model;
 	}
@@ -36,13 +36,13 @@ public class ControladorController {
 	public ModelAndView save(@Valid Controlador controlador, BindingResult validation, ModelAndView model, RedirectAttributes flash,
 							@RequestParam("nick") String username, @RequestParam("senha") String senha) {
 		if (validation.hasErrors()) {
-			model.setViewName("controlador/formControlador");
+			model.setViewName("/controlador/formControlador");
 			return model;
 		}
 		else {
 			this.controladorService.saveControlador(controlador, username, senha);
 
-			model.setViewName("redirect:login");
+			model.setViewName("redirect:/login");
 			flash.addFlashAttribute("mensagem", "Controlador cadastrado com sucesso!");
 
 			return model;

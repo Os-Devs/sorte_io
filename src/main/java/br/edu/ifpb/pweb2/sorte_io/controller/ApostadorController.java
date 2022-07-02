@@ -25,7 +25,7 @@ public class ApostadorController {
 	@RequestMapping("/form")
 	public ModelAndView getForm(Apostador apostador, ModelAndView model) {
 		model.addObject("apostador", apostador);
-		model.setViewName("apostador/formApostador");
+		model.setViewName("/apostador/formApostador");
 
 		return model;
 	}
@@ -34,13 +34,13 @@ public class ApostadorController {
 	public ModelAndView save(@Valid Apostador apostador, BindingResult validation, ModelAndView model, RedirectAttributes flash,
 							@RequestParam(value = "nick") String nick, @RequestParam(value = "senha") String senha) {
 		if (validation.hasErrors()) {
-			model.setViewName("apostador/formApostador");
+			model.setViewName("/apostador/formApostador");
 			return model;
 		}
 		else {
 			apostadorService.saveApostador(apostador, nick, senha);
 
-			model.setViewName("redirect:login");
+			model.setViewName("redirect:/login");
 			flash.addFlashAttribute("mensagem", "Apostador cadastrado com sucesso!");
 
 			return model;

@@ -32,9 +32,8 @@ public class ApostaController {
 	@RequestMapping("/aposta")
 	public ModelAndView aposta(ModelAndView model, Principal auth) {
 		model.addObject("minhasApostas", apostaService.findByUser(auth.getName()));
-		// model.addObject("apostasPerdidas", apostaService.findByUser(auth.getName()));
 
-		model.setViewName("apostas/aposta");
+		model.setViewName("/apostas/aposta");
 
 		return model;
 	}
@@ -46,7 +45,7 @@ public class ApostaController {
 		model.addObject("apostasFavoritas", apostaService.findFavoritos(auth.getName()));
 		model.addObject("sorteiosAbertos", sorteioService.sorteiosAbertos());
 		model.addObject("aposta", aposta);
-		model.setViewName("apostas/cadastro");
+		model.setViewName("/apostas/cadastro");
 
 		return model;
 	}
@@ -60,11 +59,11 @@ public class ApostaController {
 		boolean valid = apostaService.createAposta(value, aposta, auth.getName());
 
 		if(valid) {
-			model.setViewName("redirect:apostas/aposta");
+			model.setViewName("redirect:/apostas/aposta");
 			flash.addFlashAttribute("sucesso", "Aposta cadastrada!");
 		}
 		else {
-			model.setViewName("redirect:apostas");
+			model.setViewName("redirect:/apostas");
 			flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo!");
 		}
 
