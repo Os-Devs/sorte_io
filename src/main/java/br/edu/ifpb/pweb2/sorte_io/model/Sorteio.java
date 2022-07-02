@@ -3,6 +3,7 @@ package br.edu.ifpb.pweb2.sorte_io.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -73,13 +74,10 @@ public class Sorteio {
 	private boolean realizado;
 
 	@Transient
-	private List<Aposta> vencedores;
+	private List<Aposta> vencedores = new ArrayList<>();
 
 	@Transient
-	private Map<Integer, List<Aposta>> acertos;
-
-	@Transient
-	private Set<Integer> auxSet;
+	private Map<Integer, List<Aposta>> acertos = new HashMap<>();
 
 
 	public void add(Aposta aposta) {
