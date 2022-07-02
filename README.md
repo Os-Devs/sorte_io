@@ -92,8 +92,8 @@ Um sorteio é a seleção de um conjunto de exatamente 6 números numa determina
 - ✔️ O sistema deve ter uma tela de cadastro e de login para um cliente poder se cadastrar e realizar suas apostas para um sorteio futuro.
 - ✔️ Uma tela de login também deve ser disponibilizada para o usuário controlador, que realiza um sorteio. 
 
-- ❌ Sobre os sorteios, o controlador só poderá criar um sorteio em uma data que seja posterior ao último sorteio e sempre com pelo menos 1 semana entre eles.
-- ❌ Se houver um sorteio em aberto, um novo não poderá ser criado até que este seja realizado (números sorteados).
+- ✔️ Sobre os sorteios, o controlador só poderá criar um sorteio em uma data que seja posterior ao último sorteio e sempre com pelo menos 1 semana entre eles.
+- ✔️ Se houver um sorteio em aberto, um novo não poderá ser criado até que este seja realizado (números sorteados).
 
 ```
 ???

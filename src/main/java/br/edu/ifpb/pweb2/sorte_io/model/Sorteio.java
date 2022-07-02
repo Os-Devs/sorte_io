@@ -130,14 +130,16 @@ public class Sorteio {
 		}
 	}
 
-	public List<Aposta> distribuirPremiacao() {
+	public List<Apostador> distribuirPremiacao() {
 		BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
+		List<Apostador> apostadores = new ArrayList<>();
 
 		for(Aposta aposta : this.vencedores) {
 			aposta.getApostador().setGanhos(aposta.getApostador().getGanhos().add(valor));
+			apostadores.add(aposta.getApostador());
 		}
 
-		return this.vencedores;
+		return apostadores;
 	}
 	
 }

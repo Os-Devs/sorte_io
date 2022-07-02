@@ -22,7 +22,7 @@
 	<div class="container text-center mt-4">
 		<div class="d-flex justify-content-center">
 
-			<form th:action="@{/sorteios}" method="post" th:object="${sorteio}">
+			<form th:action="@{/sorteios/realizar/{id}(id=${sorteio.id})}" method="post" th:object="${sorteio}">
 				<input type="hidden" th:field="*{id}">
 
 
@@ -33,7 +33,7 @@
 					<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:text="${n}"></label>
 				</div>
 
-                    <button type="submit" class="btn btn-success">Cadastrar Sorteio</button>
+                    <button type="submit" class="btn btn-success">Realizar Sorteio</button>
 				</div>
 			</form>
 		</div>
