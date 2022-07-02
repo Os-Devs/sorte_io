@@ -36,19 +36,11 @@ Em seguida execute o comando [**`docker-compose down`**](./docker/docker-compose
 
 - **MySQL** e **phpMyAdmin** irão
 
-Caso seja necessário remover o banco
+Caso seja necessário remover o **banco** execute  o comando [**`docker-compose down -v`**](./docker/docker-compose.yml)
 
+    docker-compose down -v
+    rm -r ~/mysql/*
 ---
-
-<!-- ## Usuarios
-
-- Criador de Sorteios
-    - Username: `controlador`
-    - Password: `controlador123`
-
-- Apostador
-    - Username: `apostador`
-    - Password: `apostador123` -->
 
 ## 1. Requisitos Funcionais
 
