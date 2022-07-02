@@ -105,8 +105,8 @@ Apostador consulta resultado do sorteio, sistema retorna se ganhou ou quantos nu
 
 ---
 
-- ❌ O sorteio dos números poderá ser feito de forma aleatória
-    - ❓ Quando o controlador pedir ao sistema
+- ✔️ O sorteio dos números poderá ser feito de forma aleatória
+    - ✔️ Quando o controlador pedir ao sistema
 
 ---
 
@@ -143,9 +143,9 @@ Apostador consulta resultado do sorteio, sistema retorna se ganhou ou quantos nu
 
     [✔️] | 15 | Implementou a realização de aposta por cliente
 
-    [❌] | 15 | Implementou a realização de sorteio por controlador
+    [✔️] | 15 | Implementou a realização de sorteio por controlador
 
-    [❌] | 15 | Implementou a conferência das apostas em um sorteio
+    [✔️] | 15 | Implementou a conferência das apostas em um sorteio
 
     [✔️] | 15 | Implementou as apostas preferidas de um cliente
 
