@@ -36,6 +36,10 @@
 								</li>
 								<li sec:authorize="hasRole('USER')">
 									<a class="dropdown-item" th:href="@{/apostas/aposta}"><i class="bi bi-wallet2"></i> Minhas Apostas</a>
+									<hr class="dropdown-divider">
+								</li>
+								<li sec:authorize="hasRole('USER')">
+									<a class="dropdown-item" th:href="@{/pagamento}"><i class="bi bi-credit-card"></i> Pagamentos</a>
 								</li>
 							</ul>
 						</li>
