@@ -1,6 +1,9 @@
 package br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Controlador;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
+import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
+import br.edu.ifpb.pweb2.sorte_io.repository.ApostasRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.ControladoresRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.SorteiosRepository;
 import br.edu.ifpb.pweb2.sorte_io.services.sorteio.SorteioService;
@@ -23,16 +28,17 @@ public class SorteioImp implements SorteioService {
     SorteiosRepository sorteiosRepository;
 
     @Autowired
+    ApostadoresRepository apostadoresRepository;
+
+    @Autowired
     ControladoresRepository controladoresRepository;
 
     @Override
     @Transactional
-    public boolean createSorteio(String value, Sorteio sorteio, String username) {
-        if(this.validNumeros(value)) {
+    public boolean createSorteio(Sorteio sorteio, String username) {
+        if(validSorteio(sorteio, username)) {
             Controlador criador = this.controladoresRepository.findByUser(username).get();
-            Set<String> numSorteados = new HashSet<>(Arrays.asList(value.split(",")));
 
-            sorteio.setNumSorteados(numSorteados);
             sorteio.setCriadoPor(criador);
             criador.add(sorteio);
 
@@ -44,6 +50,30 @@ public class SorteioImp implements SorteioService {
         else {
             return false;
         }
+
+    }
+
+    private boolean validSorteio(Sorteio sorteio, String username) {
+        List<Sorteio> sorteiosAbertos = this.sorteiosRepository.findBySorteioAbertoForUser(username).get();
+
+        if(sorteiosAbertos.isEmpty()) {
+            boolean teste = true;
+
+            List<Sorteio> sorteios = this.sorteiosForUser(username);
+
+            for (Sorteio sort : sorteios) {
+                Duration duracao = Duration.between(sort.getDtRealizacao().toInstant(), Instant.now());
+
+                if(duracao.toDays() <= 7) {
+                    teste = false;
+                    break;
+                }
+            }
+
+            return teste;
+        }
+
+        return false;
     }
 
     private boolean validNumeros(String value) {
@@ -74,7 +104,51 @@ public class SorteioImp implements SorteioService {
 
     @Override
     public List<Sorteio> sorteiosForUser(String username) {
-        return this.sorteiosRepository.findBySorteiosForUser(username).get();
+        return this.sorteiosRepository.findBySorteioAbertoForUser(username).get();
+    }
+
+    @Override
+    public boolean realizarSorteio(Integer id, String value) {
+        Sorteio sorteio = this.sorteiosRepository.getById(id);
+
+        if(this.validNumeros(value)) {
+            Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
+
+            if(values.size() == 6) {
+                sorteio.setRealizado(true);
+                sorteio.setNumSorteados(values);
+
+                sorteio.vencedores();
+                this.sorteiosRepository.save(sorteio);
+
+                this.apostadoresRepository.saveAll(sorteio.distribuirPremiacao());
+            }
+            else {
+                sorteio.setRealizado(true);
+                sorteio.sortear();
+
+                sorteio.vencedores();
+                this.sorteiosRepository.save(sorteio);
+
+                this.apostadoresRepository.saveAll(sorteio.distribuirPremiacao());
+            }
+        }
+        else {
+            sorteio.setRealizado(true);
+            sorteio.sortear();
+
+            sorteio.vencedores();
+            this.sorteiosRepository.save(sorteio);
+
+            this.apostadoresRepository.saveAll(sorteio.distribuirPremiacao());
+        }
+
+        return true;
+    }
+
+    @Override
+    public Sorteio getSorteioById(Integer id) {
+        return this.sorteiosRepository.getById(id);
     }
     
 }

@@ -3,6 +3,7 @@ package br.edu.ifpb.pweb2.sorte_io.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -19,9 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-// import javax.validation.constraints.Future;
+import javax.validation.constraints.Future;
 
-// import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,15 @@ public class Sorteio {
 	)
 	private Integer id;
 
+	@DateTimeFormat(
+		pattern = "yyyy-MM-dd'T'HH:mm"
+	)
+	@NotNull(
+		message = "Campo é obrigatório!"
+	)
+	@Future(
+		message = "A realização precisa ser numa data futura"
+	)
 	private Date dtRealizacao;
 	
 	@ElementCollection
@@ -64,13 +74,10 @@ public class Sorteio {
 	private boolean realizado;
 
 	@Transient
-	private List<Aposta> vencedores;
+	private List<Aposta> vencedores = new ArrayList<>();
 
 	@Transient
-	private Map<Integer, List<Aposta>> acertos;
-
-	@Transient
-	private Set<Integer> auxSet;
+	private Map<Integer, List<Aposta>> acertos = new HashMap<>();
 
 
 	public void add(Aposta aposta) {
@@ -121,14 +128,16 @@ public class Sorteio {
 		}
 	}
 
-	public List<Aposta> distribuirPremiacao() {
+	public List<Apostador> distribuirPremiacao() {
 		BigDecimal valor = this.valPremiacao.divide(BigDecimal.valueOf(this.vencedores.size()));
+		List<Apostador> apostadores = new ArrayList<>();
 
 		for(Aposta aposta : this.vencedores) {
 			aposta.getApostador().setGanhos(aposta.getApostador().getGanhos().add(valor));
+			apostadores.add(aposta.getApostador());
 		}
 
-		return this.vencedores;
+		return apostadores;
 	}
 	
 }
