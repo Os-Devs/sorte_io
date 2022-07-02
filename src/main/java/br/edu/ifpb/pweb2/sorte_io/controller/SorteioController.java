@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -74,8 +76,11 @@ public class SorteioController {
 	}
 
 	@RequestMapping(value = "/realizar/{id}", method = RequestMethod.POST)
-	public ModelAndView realizarSorteio(ModelAndView model, @PathVariable("id") Integer id, @RequestAttribute(value = "checkboxes", required = false) String value,
+	@ResponseBody
+	public ModelAndView realizarSorteio(ModelAndView model, @PathVariable("id") Integer id, @RequestParam(value = "checkboxes", required = false) String value,
 										RedirectAttributes flash) {
+		
+		System.out.println(value);
 		boolean valid = sorteioService.realizarSorteio(id, value);
 
 		if(valid) {

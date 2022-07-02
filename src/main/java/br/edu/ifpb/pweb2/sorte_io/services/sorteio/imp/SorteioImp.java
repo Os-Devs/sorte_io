@@ -104,7 +104,7 @@ public class SorteioImp implements SorteioService {
 
     @Override
     public List<Sorteio> sorteiosForUser(String username) {
-        return this.sorteiosRepository.findBySorteiosForUser(username).get();
+        return this.sorteiosRepository.findBySorteioAbertoForUser(username).get();
     }
 
     @Override
@@ -116,7 +116,6 @@ public class SorteioImp implements SorteioService {
 
             if(values.size() == 6) {
                 sorteio.setRealizado(true);
-                sorteio.setDtRealizacao(new Date());
                 sorteio.setNumSorteados(values);
 
                 sorteio.vencedores();
@@ -126,7 +125,6 @@ public class SorteioImp implements SorteioService {
             }
             else {
                 sorteio.setRealizado(true);
-                sorteio.setDtRealizacao(new Date());
                 sorteio.sortear();
 
                 sorteio.vencedores();
@@ -137,7 +135,6 @@ public class SorteioImp implements SorteioService {
         }
         else {
             sorteio.setRealizado(true);
-            sorteio.setDtRealizacao(new Date());
             sorteio.sortear();
 
             sorteio.vencedores();
