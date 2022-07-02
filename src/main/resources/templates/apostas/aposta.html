@@ -18,8 +18,11 @@
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 
-	<div class="container mt-4 text-center">
+	<a th:inline="text" class="nav-link disabled">
+		<i class="bi bi-wallet"> R$ [[${#numbers.formatDecimal(apostador.ganhos - apostador.gastos, 0, 'POINT', 2, 'COMMA')}]]</i>
+	</a>
 
+	<div class="container mt-4 text-center">
 		<h1 class="display-3 text-white pb-2">Minhas Apostas</h1>
 		<div class="d-flex flex-grow-1 flex-wrap justify-content-evenly text-center px-3 py-2 gap-3">
 			<div th:each="a : ${minhasApostas}" class="card border border-success rounded-pill border-3 h-100 my-2 flex-grow-1 bg-success bg-gradient ">
