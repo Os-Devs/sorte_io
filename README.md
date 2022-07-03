@@ -9,36 +9,44 @@
 ## Subindo Banco via Docker
 > É necessário a instalação do [Docker](https://docs.docker.com/get-docker/) e [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
-Na raiz do diretório, navegue para a pasta [**`docker`**](./docker/), em seguida execute o comando [**`docker-compose up`**](./docker/docker-compose.yml)
+Na raiz do projeto, navegue para a pasta [**`docker`**](./docker/), em seguida execute o comando [**`docker-compose up`**](https://docs.docker.com/engine/reference/commandline/compose_up/)
 
     cd ./docker
-    docker-compose up -d
+    docker compose up -d
 
-- **MySQL** irá subir na porta **`3306`**
-- [**phpMyAdmin**](http:localhost:80) irá subir na url **`80`**
-    - user: **`root`**
-    - password: **`ifpb`**
+- Será criado um volume na sua maquina local no caminho `~/mysql/`, a fim de persistir os dados
+- **MySQL** serão iniciados na porta **`3306`**
+- **phpMyAdmin** serão iniciados na porta **`80`**
+    - Painel de controle: [**`localhost:80`**](http:localhost:80)
+        - user: **`root`**
+        - password: **`ifpb`**
 
-## Executando a aplicação
+---
+
+## Executar aplicação
 > É necessário executar [**`SorteIoApplication`**](/src/main/java/br/edu/ifpb/pweb2/sorte_io/SorteIoApplication.java)
 
-- Será criado as tabelas necessárias no 
+- Será criado as tabelas necessárias no banco de dados
 - **Tomcat** irá subir na porta **`8080`**
-- A aplicação foi mapeada para iniciar na url [**`localhost:8080/sorte_io/`**](http:localhost:8080/sorte_io/)
+    - *context path* foi definido para **`sorte_io`**
+    - Página principal da aplicação: [**`localhost:8080/sorte_io/`**](http:localhost:8080/sorte_io/)
 
+---
 
 ## Finalizar aplicação
-> É necessário para a execução de [**`SorteIoApplication`**](/src/main/java/br/edu/ifpb/pweb2/sorte_io/SorteIoApplication.java)
+> É necessário encerrar a execução de [**`SorteIoApplication`**](/src/main/java/br/edu/ifpb/pweb2/sorte_io/SorteIoApplication.java)
 
-Em seguida execute o comando [**`docker-compose down`**](./docker/docker-compose.yml)
+Em seguida execute os seguintes comandos [**`docker compose down`**](https://docs.docker.com/engine/reference/commandline/compose_down/)
 
-    docker-compose down
+    docker compose down
 
-- **MySQL** e **phpMyAdmin** irão
+- **MySQL** e **phpMyAdmin** serão desligados
 
-Caso seja necessário remover o **banco** execute  o comando [**`docker-compose down -v`**](./docker/docker-compose.yml)
+---
+## Excluindo dados persistidos
+Caso seja necessário remover o **banco de dados** execute o comando [**`docker compose down`**](https://docs.docker.com/engine/reference/commandline/compose_down/) e em seguida exclua todos os arquivos da pasta **`~/mysql/`**
 
-    docker-compose down -v
+    docker compose down -v
     rm -r ~/mysql/*
 ---
 
@@ -86,14 +94,7 @@ Um sorteio é a seleção de um conjunto de exatamente 6 números numa determina
 
 - ✔️ Sobre os sorteios, o controlador só poderá criar um sorteio em uma data que seja posterior ao último sorteio e sempre com pelo menos 1 semana entre eles.
 - ✔️ Se houver um sorteio em aberto, um novo não poderá ser criado até que este seja realizado (números sorteados).
-
-```
-???
-Apostador consulta resultado do sorteio, sistema retorna se ganhou ou quantos numeros apostador acertou 
-???
-```
-
-- ✔️ Uma vez que um sorteio tenha sido feito, os clientes poderão se logare pedir a conferência de suas apostas. 
+- ✔️ Uma vez que um sorteio tenha sido feito, os clientes poderão se logar e pedir a conferência de suas apostas. 
 
 ---
 
@@ -153,18 +154,15 @@ Apostador consulta resultado do sorteio, sistema retorna se ganhou ou quantos nu
 
 ---
 
-    TOTAL 100 pontos
-    ATUAL  70 pontos
-
 ## 4. Recomendações:
 1. Utilizar um nome próprio para o sistema. Evite: “projetospring”, “projetofred”, “projetopweb2”, “projeto”. Prefira: “BoaSorte”, “SpringSena”, “Milionário”, “Trevoda Sorte”, “JogaFácil” etc.
 
-2. ✔️ Usar Maven e Git.
+2. Usar Maven e Git.
 
 3. Um vídeo deve ser gravado pela equipe demonstrando todas as funcionalidades (ou bugs) do sistema rodando. Funcionalidade não apresentada no vídeo será considerada não implementada. O vídeo deve mostrar também a arquitetura do código fonte. Não precisa mostrar classe a classe, só o esquema geral (“aqui implementamos controladores para não pôra lógica dentro dos controladores Spring”, “não vamos mostrar os DAOs porque o Spring gera automático” etc).
 
-4.  Deem um nome à equipe. Mais uma vez, seja criativo. O formulário de submissão solicitará 3 coisas: nomesdosalunos, nome da equipe e link para o vídeo no Youtube ou outro site.Apenas um membro da equipe precisa submeter o formulário.
+4.  Deem um nome à equipe. Mais uma vez, seja criativo. O formulário de submissão solicitará 3 coisas: nomes dos alunos, nome da equipe e link para o vídeo no Youtube ou outro site. Apenas um membro da equipe precisa submeter o formulário.
 
-5. ✔️ Não comecem a fazer na última semana, pois não dará tempo. O melhor momento para começar foi ontem, o segundo melhor é agora. Ponto.
+5. Não comecem a fazer na última semana, pois não dará tempo. O melhor momento para começar foi ontem, o segundo melhor é agora. Ponto.
 
 6. Não será possível dilatar muito o prazo da reposição pois a entrega ocorrerá na última semana de aula do semestre letivo.
