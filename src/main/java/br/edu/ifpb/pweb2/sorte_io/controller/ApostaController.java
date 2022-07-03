@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifpb.pweb2.sorte_io.services.aposta.imp.ApostaImp;
+import br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.ApostadorImpl;
 import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 import br.edu.ifpb.pweb2.sorte_io.model.Aposta;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
@@ -29,10 +30,13 @@ public class ApostaController {
 	@Autowired
 	SorteioImp sorteioService;
 
+	@Autowired
+	ApostadorImpl apostadorService;
+
 	@RequestMapping("/aposta")
 	public ModelAndView aposta(ModelAndView model, Principal auth) {
 		model.addObject("minhasApostas", apostaService.findByUser(auth.getName()));
-
+		model.addObject("apostador", apostadorService.getApostadorForUser(auth.getName()));
 		model.setViewName("/apostas/aposta");
 
 		return model;
