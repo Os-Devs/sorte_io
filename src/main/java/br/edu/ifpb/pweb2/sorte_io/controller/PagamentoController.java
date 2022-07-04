@@ -36,21 +36,27 @@ public class PagamentoController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView save(ModelAndView model, Principal auth, RedirectAttributes flash, @RequestParam(value = "saldo") BigDecimal saldo, @RequestParam(value = "radio") String radio) {
-		
-		Apostador apostador = apostadorService.findByUser(auth.getName());
-		apostador.setGanhos(saldo.add(apostador.getGanhos()));
+		if(saldo.signum() < 0) {
+			model.setViewName("redirect:/pagamento");
+			flash.addFlashAttribute("alerta", "Valor inválido!");
 
-		apostadoresRepository.save(apostador);
-
-		// System.out.println(saldo);
-		// System.out.println(saldo.getClass().getName());
-		// System.out.println(radio);
-		// System.out.println(saldo.add(apostador.getGanhos()));
-		// System.out.println(apostador.getGanhos());
-		
-		
-		model.setViewName("redirect:/apostas/aposta");
-		flash.addFlashAttribute("sucesso", "Saldo Adicionado!");
-		return model;
+			return model;
+			
+		} else {
+			Apostador apostador = apostadorService.findByUser(auth.getName());
+			apostador.setGanhos(saldo.add(apostador.getGanhos()));
+			
+			apostadoresRepository.save(apostador);
+			
+			// System.out.println(saldo);
+			// System.out.println(saldo.getClass().getName());
+			// System.out.println(radio);
+			// System.out.println(saldo.add(apostador.getGanhos()));
+			// System.out.println(apostador.getGanhos());
+			
+			model.setViewName("redirect:/apostas/aposta");
+			flash.addFlashAttribute("sucesso", "Saldo Adicionado!");
+			return model;
+		}
 	}
 }

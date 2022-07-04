@@ -18,6 +18,13 @@
 		<span th:text="${sucesso}"></span>
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
+	<div th:if="${alerta}" class="alert alert-danger alert-dismissible fade show" role="alert">
+		<span th:inline="text">
+			[[${alerta}]]
+		</span>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	
 	<div class="container-fluid d-flex justify-content-center mt-5">
 		<form th:action="@{/pagamento}" id="form-pagamento" method="post">
 		<div class="row ">
