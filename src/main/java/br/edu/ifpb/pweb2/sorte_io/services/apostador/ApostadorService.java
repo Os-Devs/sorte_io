@@ -4,5 +4,5 @@ import br.edu.ifpb.pweb2.sorte_io.model.Apostador;
 
 public interface ApostadorService {
     void saveApostador(Apostador apostador, String username, String senha);
-    Apostador getApostadorForUser(String username);
+    Apostador findByUser(String username);
 }

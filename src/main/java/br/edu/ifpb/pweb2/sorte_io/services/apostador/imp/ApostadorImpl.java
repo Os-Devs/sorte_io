@@ -29,7 +29,7 @@ public class ApostadorImpl implements ApostadorService {
     AuthorityRepository authorityRepository;
 
     @Override
-    public Apostador getApostadorForUser(String username) {
+    public Apostador findByUser(String username) {
         return apostadoresRepository.findByUser(username).get();
     }
 

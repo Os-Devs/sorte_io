@@ -36,7 +36,7 @@ public class ApostaController {
 	@RequestMapping("/aposta")
 	public ModelAndView aposta(ModelAndView model, Principal auth) {
 		model.addObject("minhasApostas", apostaService.findByUser(auth.getName()));
-		model.addObject("apostador", apostadorService.getApostadorForUser(auth.getName()));
+		model.addObject("apostador", apostadorService.findByUser(auth.getName()));
 		model.setViewName("/apostas/aposta");
 
 		return model;
