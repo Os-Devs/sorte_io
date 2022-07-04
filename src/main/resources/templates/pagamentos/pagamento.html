@@ -14,8 +14,12 @@
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
 <body class="bg-dark text-white">
+	<div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<span th:text="${sucesso}"></span>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
 	<div class="container-fluid d-flex justify-content-center mt-5">
-
+		<form th:action="@{/pagamento}" id="form-pagamento" method="post">
 		<div class="row ">
 			<div class="col">
 			  <div class="card h-100 bg-dark text-white">
@@ -24,7 +28,7 @@
 				  <hr>
 				  <div class="form-check">
 					<div class="d-grid gap-2 mt-4 mb-3">
-						<input type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off" checked>
+						<input th:name="radio" value="paypal" type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off" checked>
   							<label class="btn btn-outline-primary" for="primary-outlined">
 									<div class="row">
 										<div class="col-sm-8">Paypal</div>
@@ -37,7 +41,7 @@
 				  </div>
 				  <div class="form-check">
 					<div class="d-grid gap-2 mb-3">
-						<input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+						<input th:name="radio" value="cartao" type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
 						<label class="btn btn-outline-danger" for="danger-outlined">
 							<div class="row">
 								<div class="col-sm-6">Cartão</div>
@@ -52,7 +56,7 @@
 
 				  <div class="form-check">
 					<div class="d-grid gap-2 mt-3 mb-3">
-						<input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
+						<input th:name="radio" value="pix" type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
   							<label class="btn btn-outline-success" for="success-outlined">
 									<div class="row">
 										<div class="col-sm-8">PIX</div>
@@ -75,11 +79,14 @@
 				  <p class="card-text">Valor total a ser comprado:</p> 
 				  <div class="input-group mb-3">
 					<span class="input-group-text">R$</span>
-					<input type="number" class="form-control" aria-label="R$">
+					<input th:name="saldo" type="number" class="form-control" aria-label="R$">
 					<span class="input-group-text">,00</span>
 				  </div>
 				  <div class="d-grid gap-2 mt-5">
-					<a href="#" class="btn btn-success">Finalizar Pagamento</a>
+					<a class="btn btn-success" href="#" onclick="document.querySelector('#form-pagamento').submit()" sec:authorize="isAuthenticated()">
+						Finalizar Pagamento <i class="bi bi-box-arrow-right"></i>
+					</a>
+					</form>
 				  </div>
 				  
 				</div>
