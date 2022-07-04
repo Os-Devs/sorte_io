@@ -20,22 +20,22 @@
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 	<div class="container text-center mt-4">
-		<div class="d-flex justify-content-center">
 
-			<form th:action="@{/sorteios/realizar/{id}(id=${sorteio.id})}" method="post" th:object="${sorteio}">
-				<input type="hidden" th:field="*{id}">
+		<form th:action="@{/sorteios/realizar/{id}(id=${sorteio.id})}" method="post" th:object="${sorteio}">
+			<input type="hidden" th:field="*{id}">
 
+			<h1 class="display-3 text-center text-white pb-2">Realizar Sorteio</h1>
+			<p class="lead text-center">Selecione 6 números para realizar um sorteio</p>
 
-				<h1 class="display-3 text-center text-white pb-2">Realizar Sorteio</h1>
-				<p class="lead text-center">Selecione 6 números para realizar um sorteio</p>
-				<div class="form-check form-check-inline" th:each=" n : ${#numbers.sequence(1, 60)}">
+			<div class="container pb-3">
+				<div class="form-check py-2 px-1 form-check-inline" th:each=" n : ${#numbers.sequence(1, 60)}">
 					<input type="checkbox" th:value="${n}" class="btn-check" th:id="${n}" th:name="checkboxes" autocomplete="off">
-					<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:text="${n}"></label>
+					<label class="btn btn-outline-success aposta-checkbox" th:attr="for=${n}" th:inline="text">[[${n}]]</label>
 				</div>
-
-                <button type="submit" class="btn btn-success">Realizar Sorteio</button>
-
-			</form>
+			</div>
+				
+			<button type="submit" class="btn btn-success">Realizar Sorteio</button>
+		</form>
 		</div>
 	</div>
 </body>
