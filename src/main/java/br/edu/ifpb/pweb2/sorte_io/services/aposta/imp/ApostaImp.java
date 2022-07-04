@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import br.edu.ifpb.pweb2.sorte_io.services.aposta.calculadora.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,20 +105,19 @@ public class ApostaImp implements ApostaService {
     }
 
     private BigDecimal calcValores(Set<String> aposta) {
-        // TODO: STRATEGY ???
+        // CHAIN + TEMPLATE
 
-        switch (aposta.size()) {
-            case 7:
-                return BigDecimal.valueOf(15);
-            case 8:
-                return BigDecimal.valueOf(90);
-            case 9:
-                return BigDecimal.valueOf(300);
-            case 10:
-                return BigDecimal.valueOf(1200);
-            default:
-                return BigDecimal.valueOf(3);
-        }
+        Valores valor = new ApostaDez(
+                new ApostaNove(
+                        new ApostaOito(
+                                new ApostaSete(
+                                        new ApostaSeis()
+                                )
+                        )
+                )
+        );
+        return valor.calValores(aposta);
+
     }
 
     @Override
