@@ -6,6 +6,7 @@
 <head>
 	<div th:replace="~{fragments/bootstrap.html :: header}"></div>
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/payStyle.css}" />
 	<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
 	<title>Sorte.io - Pagamentos</title>
 </head>
@@ -13,5 +14,78 @@
 	<div th:replace="~{fragments/navbar.html :: navbar}"></div>
 </header>
 <body class="bg-dark text-white">
-	
+	<div class="container-fluid d-flex justify-content-center mt-5">
+
+		<div class="row ">
+			<div class="col">
+			  <div class="card h-100 bg-dark text-white">
+				<div class="card-body">
+				  <h5 class="card-title">Método de Pagamento</h5>
+				  <hr>
+				  <div class="form-check">
+					<div class="d-grid gap-2 mt-4 mb-3">
+						<input type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off" checked>
+  							<label class="btn btn-outline-primary" for="primary-outlined">
+									<div class="row">
+										<div class="col-sm-8">Paypal</div>
+										<div class="col-sm-4">
+											<img src="https://i.imgur.com/7kQEsHU.png" width="30">
+										</div>	
+									</div>
+  							</label>
+					  </div>
+				  </div>
+				  <div class="form-check">
+					<div class="d-grid gap-2 mb-3">
+						<input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+						<label class="btn btn-outline-danger" for="danger-outlined">
+							<div class="row">
+								<div class="col-sm-6">Cartão</div>
+								<div class="col-sm-6">
+									<img src="https://i.imgur.com/2ISgYja.png" width="30">
+									<img src="https://i.imgur.com/W1vtnOV.png" width="30">
+								  </div>
+							</div>       
+						</label>
+					</div>	
+				  </div>
+
+				  <div class="form-check">
+					<div class="d-grid gap-2 mt-3 mb-3">
+						<input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
+  							<label class="btn btn-outline-success" for="success-outlined">
+									<div class="row">
+										<div class="col-sm-8">PIX</div>
+										<div class="col-sm-4">
+											<img src="https://jocumpr.com.br/wp-content/uploads/2021/08/logo-pix-icone-1024.png" width="28">
+										</div>	
+									</div>
+  							</label>
+					  </div>
+				  </div>
+
+				</div>
+			  </div>
+			</div>
+			<div class="col">
+			  <div class="card h-100 bg-dark text-white">
+				<div class="card-body">
+				  <h5 class="card-title">Valor desejado</h5>
+				  <hr>
+				  <p class="card-text">Valor total a ser comprado:</p> 
+				  <div class="input-group mb-3">
+					<span class="input-group-text">R$</span>
+					<input type="number" class="form-control" aria-label="R$">
+					<span class="input-group-text">,00</span>
+				  </div>
+				  <div class="d-grid gap-2 mt-5">
+					<a href="#" class="btn btn-success">Finalizar Pagamento</a>
+				  </div>
+				  
+				</div>
+			  </div>
+			</div>
+		  </div>
+	</div>
+
 </body>
