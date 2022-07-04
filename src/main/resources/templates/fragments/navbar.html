@@ -36,10 +36,7 @@
 								</li>
 								<li sec:authorize="hasRole('USER')">
 									<a class="dropdown-item" th:href="@{/apostas/aposta}"><i class="bi bi-wallet2"></i> Minhas Apostas</a>
-									<hr class="dropdown-divider">
-								</li>
-								<li sec:authorize="hasRole('USER')">
-									<a class="dropdown-item" th:href="@{/pagamento}"><i class="bi bi-credit-card"></i> Pagamentos</a>
+								
 								</li>
 							</ul>
 						</li>
@@ -56,6 +53,10 @@
 								<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+								<li sec:authorize="hasRole('USER')">
+									<a class="dropdown-item" th:href="@{/pagamento}"><i class="bi bi-credit-card"></i> Inserir Saldo</a>
+								</li>
+								<hr class="dropdown-divider">
 								<a class="dropdown-item" href="#" onclick="document.querySelector('#form-login').submit()" sec:authorize="isAuthenticated()">
 									<i class="bi bi-box-arrow-right"></i> Logout
 								</a>
