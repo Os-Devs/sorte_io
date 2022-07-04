@@ -8,7 +8,7 @@ public class ApostaOito extends Valores {
     public ApostaOito(Valores proximo) {
         super(proximo);
     }
-    @Override
+
     public BigDecimal efetuarCalc(Set<String> aposta) {
         return BigDecimal.valueOf(90);
     }

@@ -9,7 +9,7 @@ public class ApostaNove extends Valores {
         super(proximo);
     }
 
-    @Override
+
     public BigDecimal efetuarCalc(Set<String> aposta) {
         return BigDecimal.valueOf(300);
     }

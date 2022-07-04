@@ -10,6 +10,7 @@ public abstract class Valores {
     public Valores(Valores proximo){
         this.proximo = proximo;
     }
+
     public BigDecimal calValores(Set<String> aposta){
         if(testaValores(aposta)){
             return efetuarCalc(aposta);

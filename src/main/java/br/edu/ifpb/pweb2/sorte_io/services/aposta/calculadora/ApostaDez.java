@@ -9,7 +9,7 @@ public class ApostaDez extends Valores {
     public ApostaDez(Valores proximo) {
         super(proximo);
     }
-    @Override
+
     public BigDecimal efetuarCalc(Set<String> aposta) {
         return BigDecimal.valueOf(1200);
     }
