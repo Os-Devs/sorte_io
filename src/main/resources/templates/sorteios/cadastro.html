@@ -31,7 +31,7 @@
 				<div class="text-center">
 					<div class="w-auto mx-5 mb-3 md-3 mb-3">
 						<label for="valPremiacao" class="form-label">Valor de Premiação</label>
-						<input type="text" placeholder="R$" th:field="*{valPremiacao}" class="form-control" aria-label="Amount">
+						<input type="number" placeholder="R$" th:field="*{valPremiacao}" class="form-control" aria-label="Amount">
 						<br>
 					</div>
 					<p class="alert alert-danger" th:if="${#fields.hasErrors('valPremiacao')}" th:errors="*{valPremiacao}" th:errorclass="error"></p>
