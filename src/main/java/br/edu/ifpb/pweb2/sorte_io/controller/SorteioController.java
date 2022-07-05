@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
+import br.edu.ifpb.pweb2.sorte_io.services.proxy.ProxySorteio;
 import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 
 @Controller
@@ -24,6 +25,9 @@ public class SorteioController {
 
 	@Autowired
 	SorteioImp sorteioService;
+
+	@Autowired
+	ProxySorteio proxy;
 
 	@RequestMapping("/sorteio")
 	public ModelAndView sorteio(ModelAndView model, Principal auth) {
@@ -52,6 +56,7 @@ public class SorteioController {
 			boolean valid = this.sorteioService.createSorteio(sorteio, auth.getName());
 
 			if(valid) {
+				this.proxy.AttProxy();
 				model.setViewName("redirect:/sorteios/sorteio");
 				flash.addFlashAttribute("sucesso", "Sorteio cadastrado com sucesso!");
 			}
@@ -82,6 +87,7 @@ public class SorteioController {
 		boolean valid = sorteioService.realizarSorteio(id, value);
 
 		if(valid) {
+			this.proxy.AttProxy();
 			model.setViewName("redirect:/sorteios/sorteio");
 			flash.addFlashAttribute("sucesso", "Sorteio realizado com sucesso!");
 		}
