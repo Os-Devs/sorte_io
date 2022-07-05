@@ -38,7 +38,7 @@ public class SorteioImp implements SorteioService {
             Controlador criador = this.controladoresRepository.findByUser(username).get();
 
             sorteio.setCriadoPor(criador)
-                   .setRealizado(false);
+                    .setRealizado(false);
                    
             criador.add(sorteio);
 
@@ -116,7 +116,7 @@ public class SorteioImp implements SorteioService {
 
             if(values.size() == 6) {
                 sorteio.setRealizado(true)
-                       .setNumSorteados(values);
+                        .setNumSorteados(values);
 
                 sorteio.vencedores();
                 this.sorteiosRepository.save(sorteio);

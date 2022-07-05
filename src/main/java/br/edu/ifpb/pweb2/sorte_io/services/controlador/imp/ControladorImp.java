@@ -49,8 +49,8 @@ public class ControladorImp implements ControladorService {
         User user = new User();
 
         user.setUsername(username)
-            .setPassword(encoder.encode(senha))
-            .setEnabled(true);
+                .setPassword(encoder.encode(senha))
+                    .setEnabled(true);
 
         return userRepository.save(user);
     }
@@ -60,11 +60,11 @@ public class ControladorImp implements ControladorService {
         Authority authority = new Authority();
 
         authorityId.setUsername(user.getUsername())
-                   .setAuthority(EnumRole.CONTROLADOR.getValue());
+                    .setAuthority(EnumRole.CONTROLADOR.getValue());
 
         authority.setId(authorityId)
-                 .setUsername(user)
-                 .setAuthority(EnumRole.CONTROLADOR.getValue());
+                    .setUsername(user)
+                        .setAuthority(EnumRole.CONTROLADOR.getValue());
 
         return authorityRepository.save(authority);
     }

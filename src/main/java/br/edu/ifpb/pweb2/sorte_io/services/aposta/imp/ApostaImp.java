@@ -41,6 +41,10 @@ public class ApostaImp implements ApostaService {
                 Apostador apostador = this.apostadoresRepository.findByUser(username).get();
                 Sorteio sorteio = this.sorteiosRepository.getById(aposta.getNumSorteio());
 
+                if(apostador.getSaldo().subtract(this.calcValores(values)).signum() < 0) {
+                    return false;
+                }
+
                 aposta.setNumSelecionados(values)
                       .setApostador(apostador)
                       .setSorteio(sorteio);
@@ -61,8 +65,12 @@ public class ApostaImp implements ApostaService {
             Apostador apostador = this.apostadoresRepository.findByUser(username).get();
             Sorteio sorteio = this.sorteiosRepository.getById(aposta.getNumSorteio());
 
+            if(apostador.getSaldo().subtract(this.calcValores(values)).signum() < 0) {
+                return false;
+            }
+
             aposta.setApostador(apostador)
-                  .setSorteio(sorteio);
+                    .setSorteio(sorteio);
 
             this.apostasRepository.save(aposta);
 
@@ -91,8 +99,8 @@ public class ApostaImp implements ApostaService {
 
     @Transactional
     private void attApostador(Apostador apostador, Set<String> values) {
-        apostador.setGastos(
-            apostador.getGastos().add(
+        apostador.setSaldo(
+            apostador.getSaldo().subtract(
                 this.calcValores(values)
             )
         );

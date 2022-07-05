@@ -134,7 +134,10 @@ public class Sorteio implements BuilderSorteio {
 		List<Apostador> apostadores = new ArrayList<>();
 
 		for(Aposta aposta : this.vencedores) {
-			aposta.getApostador().setGanhos(aposta.getApostador().getGanhos().add(valor));
+			aposta.getApostador().setSaldo(
+				aposta.getApostador().getSaldo().add(valor)
+			);
+			
 			apostadores.add(aposta.getApostador());
 		}
 

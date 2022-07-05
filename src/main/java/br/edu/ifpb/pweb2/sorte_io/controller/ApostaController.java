@@ -68,7 +68,7 @@ public class ApostaController {
 		}
 		else {
 			model.setViewName("redirect:/apostas");
-			flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo!");
+			flash.addFlashAttribute("alerta", "Revise seu saldo ou especifique 6 dezenas no mínimo e 10 no máximo para sua aposta!");
 		}
 
 		return model;

@@ -20,8 +20,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "apostadores")
 public class Apostador extends Usuario {
 	
-	private BigDecimal ganhos = BigDecimal.ZERO;
-	private BigDecimal gastos = BigDecimal.ZERO;
+	private BigDecimal saldo = BigDecimal.ZERO;
 
 	@OneToMany(
 		mappedBy = "apostador",
@@ -29,13 +28,8 @@ public class Apostador extends Usuario {
 	)
 	private List<Aposta> apostas;
 
-	public Apostador setGanhos(BigDecimal ganhos) {
-		this.ganhos = ganhos;
-		return this;
-	}
-
-	public Apostador setGastos(BigDecimal gastos) {
-		this.gastos = gastos;
+	public Apostador setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
 		return this;
 	}
 }
