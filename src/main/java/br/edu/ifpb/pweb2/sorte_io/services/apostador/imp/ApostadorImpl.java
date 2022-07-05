@@ -48,9 +48,9 @@ public class ApostadorImpl implements ApostadorService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         User user = new User();
 
-        user.setUsername(username);
-        user.setPassword(encoder.encode(senha));
-        user.setEnabled(true);
+        user.setUsername(username)
+                .setPassword(encoder.encode(senha))
+                    .setEnabled(true);
 
         return userRepository.save(user);
     }
@@ -59,12 +59,12 @@ public class ApostadorImpl implements ApostadorService {
         AuthorityId authorityId = new AuthorityId();
         Authority authority = new Authority();
 
-        authorityId.setUsername(user.getUsername());
-        authorityId.setAuthority(EnumRole.APOSTADOR.getValue());
+        authorityId.setUsername(user.getUsername())
+                        .setAuthority(EnumRole.APOSTADOR.getValue());
 
-        authority.setId(authorityId);
-        authority.setUsername(user);
-        authority.setAuthority(EnumRole.APOSTADOR.getValue());
+        authority.setId(authorityId)
+                    .setUsername(user)
+                        .setAuthority(EnumRole.APOSTADOR.getValue());
 
         return authorityRepository.save(authority);
     }

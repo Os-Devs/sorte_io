@@ -3,7 +3,6 @@ package br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import br.edu.ifpb.pweb2.sorte_io.model.Controlador;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
 import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
-import br.edu.ifpb.pweb2.sorte_io.repository.ApostasRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.ControladoresRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.SorteiosRepository;
 import br.edu.ifpb.pweb2.sorte_io.services.sorteio.SorteioService;
@@ -39,7 +37,9 @@ public class SorteioImp implements SorteioService {
         if(validSorteio(sorteio, username)) {
             Controlador criador = this.controladoresRepository.findByUser(username).get();
 
-            sorteio.setCriadoPor(criador);
+            sorteio.setCriadoPor(criador)
+                   .setRealizado(false);
+                   
             criador.add(sorteio);
 
             sorteiosRepository.save(sorteio);
@@ -64,7 +64,7 @@ public class SorteioImp implements SorteioService {
             for (Sorteio sort : sorteios) {
                 Duration duracao = Duration.between(sort.getDtRealizacao().toInstant(), Instant.now());
 
-                if(duracao.toDays() <= 7) {
+                if(duracao.toDays() < 7) {
                     teste = false;
                     break;
                 }
@@ -115,8 +115,8 @@ public class SorteioImp implements SorteioService {
             Set<String> values = new HashSet<>(Arrays.asList(value.split(",")));
 
             if(values.size() == 6) {
-                sorteio.setRealizado(true);
-                sorteio.setNumSorteados(values);
+                sorteio.setRealizado(true)
+                       .setNumSorteados(values);
 
                 sorteio.vencedores();
                 this.sorteiosRepository.save(sorteio);

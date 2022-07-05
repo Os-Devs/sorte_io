@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class ApostaDez extends Valores {
 
-
     public ApostaDez(Valores proximo) {
         super(proximo);
     }

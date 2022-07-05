@@ -41,9 +41,9 @@ public class ApostaImp implements ApostaService {
                 Apostador apostador = this.apostadoresRepository.findByUser(username).get();
                 Sorteio sorteio = this.sorteiosRepository.getById(aposta.getNumSorteio());
 
-                aposta.setNumSelecionados(values);
-                aposta.setApostador(apostador);
-                aposta.setSorteio(sorteio);
+                aposta.setNumSelecionados(values)
+                      .setApostador(apostador)
+                      .setSorteio(sorteio);
 
                 this.apostasRepository.save(aposta);
 
@@ -61,8 +61,8 @@ public class ApostaImp implements ApostaService {
             Apostador apostador = this.apostadoresRepository.findByUser(username).get();
             Sorteio sorteio = this.sorteiosRepository.getById(aposta.getNumSorteio());
 
-            aposta.setApostador(apostador);
-            aposta.setSorteio(sorteio);
+            aposta.setApostador(apostador)
+                  .setSorteio(sorteio);
 
             this.apostasRepository.save(aposta);
 
@@ -91,14 +91,23 @@ public class ApostaImp implements ApostaService {
 
     @Transactional
     private void attApostador(Apostador apostador, Set<String> values) {
-        apostador.setGastos(apostador.getGastos().add(this.calcValores(values)));
+        apostador.setGastos(
+            apostador.getGastos().add(
+                this.calcValores(values)
+            )
+        );
 
         this.apostadoresRepository.save(apostador);
     }
 
     @Transactional
     private void attSorteio(Sorteio sorteio,Aposta aposta, Set<String> values) {
-        sorteio.setValPremiacao(sorteio.getValPremiacao().add(this.calcValores(values)));
+        sorteio.setValPremiacao(
+            sorteio.getValPremiacao().add(
+                this.calcValores(values)
+            )
+        );
+        
         sorteio.add(aposta);
 
         this.sorteiosRepository.save(sorteio);
@@ -108,16 +117,16 @@ public class ApostaImp implements ApostaService {
         // CHAIN + TEMPLATE
 
         Valores valor = new ApostaDez(
-                new ApostaNove(
-                        new ApostaOito(
-                                new ApostaSete(
-                                        new ApostaSeis()
-                                )
-                        )
+            new ApostaNove(
+                new ApostaOito(
+                    new ApostaSete(
+                        new ApostaSeis()
+                    )
                 )
+            )
         );
-        return valor.calValores(aposta);
 
+        return valor.calValores(aposta);
     }
 
     @Override

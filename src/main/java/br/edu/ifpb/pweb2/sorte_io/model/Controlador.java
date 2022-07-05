@@ -9,10 +9,10 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+// import lombok.Setter;
 
 @Getter
-@Setter
+// @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "controladores")
@@ -26,5 +26,10 @@ public class Controlador extends Usuario {
 
     public void add(Sorteio sorteio) {
         this.sorteios.add(sorteio);
+    }
+
+    public Controlador setSorteios(List<Sorteio> sorteios) {
+        this.sorteios = sorteios;
+        return this;
     }
 }

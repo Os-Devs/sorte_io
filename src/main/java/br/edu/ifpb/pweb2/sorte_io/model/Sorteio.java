@@ -24,18 +24,19 @@ import javax.validation.constraints.Future;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderSorteio;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+// import lombok.Setter;
 import lombok.ToString;
 
 
 @Getter
-@Setter
+// @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "sorteios")
-public class Sorteio {
+public class Sorteio implements BuilderSorteio {
 	@Id
 	@GeneratedValue(
 		strategy = GenerationType.IDENTITY
@@ -71,7 +72,7 @@ public class Sorteio {
 	@ToString.Exclude
 	private List<Aposta> apostas;
 
-	private boolean realizado;
+	private Boolean realizado;
 
 	@Transient
 	private List<Aposta> vencedores = new ArrayList<>();
@@ -138,6 +139,57 @@ public class Sorteio {
 		}
 
 		return apostadores;
+	}
+
+	// BUILDER
+
+	@Override
+	public Sorteio setApostas(List<Aposta> apostas) {
+		this.apostas = apostas;
+
+		return this;
+	}
+
+	@Override
+	public Sorteio setCriadoPor(Controlador criadoPor) {
+		this.criadoPor = criadoPor;
+		
+		return this;
+	}
+
+	@Override
+	public Sorteio setDtRealizacao(Date dtRealizacao) {
+		this.dtRealizacao = dtRealizacao;
+
+		return null;
+	}
+
+	@Override
+	public Sorteio setId(Integer id) {
+		this.id = id;
+
+		return this;
+	}
+
+	@Override
+	public Sorteio setNumSorteados(Set<String> numSorteados) {
+		this.numSorteados = numSorteados;
+
+		return this;
+	}
+
+	@Override
+	public Sorteio setRealizado(Boolean realizado) {
+		this.realizado = realizado;
+
+		return this;
+	}
+
+	@Override
+	public Sorteio setValPremiacao(BigDecimal valPremiacao) {
+		this.valPremiacao = valPremiacao;
+
+		return this;
 	}
 	
 }

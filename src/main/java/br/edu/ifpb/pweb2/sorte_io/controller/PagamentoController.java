@@ -44,15 +44,9 @@ public class PagamentoController {
 			
 		} else {
 			Apostador apostador = apostadorService.findByUser(auth.getName());
-			apostador.setGanhos(saldo.add(apostador.getGanhos()));
+			apostador.setGanhos(apostador.getGanhos().add(saldo));
 			
 			apostadoresRepository.save(apostador);
-			
-			// System.out.println(saldo);
-			// System.out.println(saldo.getClass().getName());
-			// System.out.println(radio);
-			// System.out.println(saldo.add(apostador.getGanhos()));
-			// System.out.println(apostador.getGanhos());
 			
 			model.setViewName("redirect:/apostas/aposta");
 			flash.addFlashAttribute("sucesso", "Saldo Adicionado!");

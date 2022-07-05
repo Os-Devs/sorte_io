@@ -9,10 +9,9 @@ public class ApostaSete extends Valores {
         super(proximo);
     }
 
-
     public BigDecimal efetuarCalc(Set<String> aposta) {
-            return BigDecimal.valueOf(15);
-        }
+        return BigDecimal.valueOf(15);
+    }
 
     @Override
     public Boolean testaValores(Set<String> aposta) {

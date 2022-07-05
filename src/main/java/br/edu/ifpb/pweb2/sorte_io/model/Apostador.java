@@ -11,10 +11,10 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+// import lombok.Setter;
 
 @Getter
-@Setter
+// @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "apostadores")
@@ -28,4 +28,14 @@ public class Apostador extends Usuario {
 		cascade = CascadeType.ALL
 	)
 	private List<Aposta> apostas;
+
+	public Apostador setGanhos(BigDecimal ganhos) {
+		this.ganhos = ganhos;
+		return this;
+	}
+
+	public Apostador setGastos(BigDecimal gastos) {
+		this.gastos = gastos;
+		return this;
+	}
 }

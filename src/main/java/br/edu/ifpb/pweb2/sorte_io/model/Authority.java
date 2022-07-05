@@ -11,16 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderAuthority;
+import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderAuthorityId;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "authorities")
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Authority {
+public class Authority implements BuilderAuthority {
 
     @EmbeddedId
     private AuthorityId id;
@@ -41,13 +43,46 @@ public class Authority {
     )
     private String authority;
 
+    // BUILDER
+
+    @Override
+    public Authority setAuthority(String authority) {
+        this.authority = authority;
+        return this;
+    }
+
+    @Override
+    public Authority setId(AuthorityId id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public Authority setUsername(User username) {
+        this.username = username;
+        return this;
+    }
+
     @Embeddable
-    @Data
+    @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class AuthorityId implements Serializable {
+    public static class AuthorityId implements Serializable, BuilderAuthorityId {
         private String username;
         private String authority;
+
+        //BUILDER
+
+        @Override
+        public BuilderAuthorityId setAuthority(String authority) {
+            this.authority = authority;
+            return this;
+        }
+        @Override
+        public BuilderAuthorityId setUsername(String username) {
+            this.username = username;
+            return this;
+        }
     }
 
 }

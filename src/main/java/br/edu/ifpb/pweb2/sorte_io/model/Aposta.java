@@ -12,16 +12,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderAposta;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+// import lombok.Setter;
 
 @Getter
-@Setter
+// @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "apostas")
-public class Aposta {
+public class Aposta implements BuilderAposta {
 	@Id
 	@GeneratedValue(
 		strategy = GenerationType.IDENTITY
@@ -34,7 +35,7 @@ public class Aposta {
 	@ElementCollection
 	private Set<String> numSelecionados;
 
-	private boolean favorito;
+	private Boolean favorito;
 
 	@ManyToOne
 	private Apostador apostador;
@@ -42,12 +43,48 @@ public class Aposta {
 	@ManyToOne
 	private Sorteio sorteio;
 
-	private boolean venceu;
-
 	@Transient
 	private Integer numSorteio;
 
 	public void add(String value) {
 		this.numSelecionados.add(value);
+	}
+
+	// BUILDER
+
+	@Override
+	public Aposta setApostador(Apostador apostador) {
+		this.apostador = apostador;
+		return this;
+	}
+
+	@Override
+	public Aposta setFavorito(Boolean favorito) {
+		this.favorito = favorito;
+		return this;
+	}
+
+	@Override
+	public Aposta setId(Integer id) {
+		this.id = id;
+		return this;
+	}
+
+	@Override
+	public Aposta setNumSelecionados(Set<String> numSelecionados) {
+		this.numSelecionados = numSelecionados;
+		return this;
+	}
+
+	@Override
+	public Aposta setSorteio(Sorteio sorteio) {
+		this.sorteio = sorteio;
+		return this;
+	}
+
+	@Override
+	public BuilderAposta setNumSorteio(Integer numSorteio) {
+		this.numSorteio = numSorteio;
+		return this;
 	}
 }
