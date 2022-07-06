@@ -22,7 +22,7 @@ import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderUsuario;
 import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Getter;
-// import lombok.Setter;
+
 import lombok.ToString;
 
 @Entity

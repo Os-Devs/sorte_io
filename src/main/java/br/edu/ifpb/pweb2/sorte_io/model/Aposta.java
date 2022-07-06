@@ -15,7 +15,6 @@ import javax.persistence.Transient;
 import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderAposta;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-// import lombok.Setter;
 
 @Getter
 // @Setter
