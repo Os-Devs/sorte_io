@@ -48,9 +48,9 @@ public class ControladorImp implements ControladorService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         User user = new User();
 
-        user.setUsername(username);
-        user.setPassword(encoder.encode(senha));
-        user.setEnabled(true);
+        user.setUsername(username)
+                .setPassword(encoder.encode(senha))
+                    .setEnabled(true);
 
         return userRepository.save(user);
     }
@@ -59,12 +59,12 @@ public class ControladorImp implements ControladorService {
         AuthorityId authorityId = new AuthorityId();
         Authority authority = new Authority();
 
-        authorityId.setUsername(user.getUsername());
-        authorityId.setAuthority(EnumRole.CONTROLADOR.getValue());
+        authorityId.setUsername(user.getUsername())
+                    .setAuthority(EnumRole.CONTROLADOR.getValue());
 
-        authority.setId(authorityId);
-        authority.setUsername(user);
-        authority.setAuthority(EnumRole.CONTROLADOR.getValue());
+        authority.setId(authorityId)
+                    .setUsername(user)
+                        .setAuthority(EnumRole.CONTROLADOR.getValue());
 
         return authorityRepository.save(authority);
     }

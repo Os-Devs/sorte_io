@@ -10,14 +10,12 @@ public class ApostaSeis extends Valores {
         super(null);
     }
 
-
     public BigDecimal efetuarCalc(Set<String> aposta) {
         return BigDecimal.valueOf(3);
     }
 
     @Override
     public Boolean testaValores(Set<String> aposta) {
-
         return true;
     }
 }

@@ -35,7 +35,7 @@
 				  <hr>
 				  <div class="form-check">
 					<div class="d-grid gap-2 mt-4 mb-3">
-						<input th:name="radio" value="paypal" type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off" checked>
+						<input th:name="radio" th:value="paypal" type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off" checked>
   							<label class="btn btn-outline-primary" for="primary-outlined">
 									<div class="row">
 										<div class="col-sm-8">Paypal</div>
@@ -48,7 +48,7 @@
 				  </div>
 				  <div class="form-check">
 					<div class="d-grid gap-2 mb-3">
-						<input th:name="radio" value="cartao" type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+						<input th:name="radio" th:value="cartao" type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
 						<label class="btn btn-outline-danger" for="danger-outlined">
 							<div class="row">
 								<div class="col-sm-6">Cartão</div>
@@ -63,7 +63,7 @@
 
 				  <div class="form-check">
 					<div class="d-grid gap-2 mt-3 mb-3">
-						<input th:name="radio" value="pix" type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
+						<input th:name="radio" th:value="pix" type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off">
   							<label class="btn btn-outline-success" for="success-outlined">
 									<div class="row">
 										<div class="col-sm-8">PIX</div>

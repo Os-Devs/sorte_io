@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifpb.pweb2.sorte_io.services.aposta.imp.ApostaImp;
 import br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.ApostadorImpl;
-import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
+import br.edu.ifpb.pweb2.sorte_io.services.proxy.ProxySorteio;
 import br.edu.ifpb.pweb2.sorte_io.model.Aposta;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
 
@@ -28,7 +28,7 @@ public class ApostaController {
 	ApostaImp apostaService;
 
 	@Autowired
-	SorteioImp sorteioService;
+	ProxySorteio proxy;
 
 	@Autowired
 	ApostadorImpl apostadorService;
@@ -47,7 +47,7 @@ public class ApostaController {
 		model.addObject("defaultAposta", new Aposta());
 		model.addObject("defaultSorteio", new Sorteio());
 		model.addObject("apostasFavoritas", apostaService.findFavoritos(auth.getName()));
-		model.addObject("sorteiosAbertos", sorteioService.sorteiosAbertos());
+		model.addObject("sorteiosAbertos", proxy.getAbertos());
 		model.addObject("aposta", aposta);
 		model.setViewName("/apostas/cadastro");
 
@@ -68,7 +68,7 @@ public class ApostaController {
 		}
 		else {
 			model.setViewName("redirect:/apostas");
-			flash.addFlashAttribute("alerta", "Especifique 6 valores no mínimo e 10 no máximo!");
+			flash.addFlashAttribute("alerta", "Revise seu saldo ou especifique 6 dezenas no mínimo e 10 no máximo para sua aposta!");
 		}
 
 		return model;

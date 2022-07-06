@@ -11,21 +11,25 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+// import lombok.Setter;
 
 @Getter
-@Setter
+// @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "apostadores")
 public class Apostador extends Usuario {
 	
-	private BigDecimal ganhos = BigDecimal.ZERO;
-	private BigDecimal gastos = BigDecimal.ZERO;
+	private BigDecimal saldo = BigDecimal.ZERO;
 
 	@OneToMany(
 		mappedBy = "apostador",
 		cascade = CascadeType.ALL
 	)
 	private List<Aposta> apostas;
+
+	public Apostador setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+		return this;
+	}
 }

@@ -15,6 +15,7 @@ public abstract class Valores {
         if(testaValores(aposta)){
             return efetuarCalc(aposta);
         }
+        
         return proximo.calValores(aposta);
     }
 

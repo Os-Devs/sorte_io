@@ -1,5 +1,7 @@
 package br.edu.ifpb.pweb2.sorte_io.services.apostador.imp;
 
+import java.math.BigDecimal;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +50,9 @@ public class ApostadorImpl implements ApostadorService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         User user = new User();
 
-        user.setUsername(username);
-        user.setPassword(encoder.encode(senha));
-        user.setEnabled(true);
+        user.setUsername(username)
+                .setPassword(encoder.encode(senha))
+                    .setEnabled(true);
 
         return userRepository.save(user);
     }
@@ -59,14 +61,31 @@ public class ApostadorImpl implements ApostadorService {
         AuthorityId authorityId = new AuthorityId();
         Authority authority = new Authority();
 
-        authorityId.setUsername(user.getUsername());
-        authorityId.setAuthority(EnumRole.APOSTADOR.getValue());
+        authorityId.setUsername(user.getUsername())
+                        .setAuthority(EnumRole.APOSTADOR.getValue());
 
-        authority.setId(authorityId);
-        authority.setUsername(user);
-        authority.setAuthority(EnumRole.APOSTADOR.getValue());
+        authority.setId(authorityId)
+                    .setUsername(user)
+                        .setAuthority(EnumRole.APOSTADOR.getValue());
 
         return authorityRepository.save(authority);
+    }
+
+    @Override
+    public Boolean attSaldo(String username, BigDecimal saldo, String radio) {
+        if(saldo.signum() < 0) {
+            return false;
+        }
+
+        Apostador apostador = apostadoresRepository.findByUser(username).get();
+
+        apostador.setSaldo(
+            apostador.getSaldo().add(saldo)
+        );
+        
+        apostadoresRepository.save(apostador);
+        
+        return true;
     }
     
 }

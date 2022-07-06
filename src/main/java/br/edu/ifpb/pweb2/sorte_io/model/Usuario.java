@@ -16,17 +16,20 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderUsuario;
+
 import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Getter;
-import lombok.Setter;
+// import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
-@Setter
-public abstract class Usuario implements Serializable {
+// @Setter
+public abstract class Usuario implements Serializable, BuilderUsuario {
 	@Id
 	@GeneratedValue(
 		strategy = GenerationType.TABLE
@@ -58,5 +61,37 @@ public abstract class Usuario implements Serializable {
 	)
 	@ToString.Exclude
     private User user;
+
+	// BUILDER
+
+	@Override
+	public Usuario setId(Integer id) {
+		this.id = id;
+		return this;
+	}
+
+	@Override
+	public Usuario setNome(String nome) {
+		this.nome = nome;
+		return this;
+	}
+
+	@Override
+	public Usuario setCpf(String cpf) {
+		this.cpf = cpf;
+		return this;
+	}
+
+	@Override
+	public Usuario setDtNascimento(Date dtNascimento) {
+		this.dtNascimento = dtNascimento;
+		return this;
+	}
+
+	@Override
+	public Usuario setUser(User user) {
+		this.user = user;
+		return this;
+	}
    
 }
