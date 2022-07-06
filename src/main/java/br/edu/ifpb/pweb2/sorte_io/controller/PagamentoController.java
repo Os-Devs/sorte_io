@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifpb.pweb2.sorte_io.model.Apostador;
+
 import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
 import br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.ApostadorImpl;
 

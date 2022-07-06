@@ -13,6 +13,8 @@ import br.edu.ifpb.pweb2.sorte_io.model.Authority;
 import br.edu.ifpb.pweb2.sorte_io.model.EnumRole;
 import br.edu.ifpb.pweb2.sorte_io.model.User;
 import br.edu.ifpb.pweb2.sorte_io.model.Authority.AuthorityId;
+import br.edu.ifpb.pweb2.sorte_io.model.strategy.FactoryPagamento;
+import br.edu.ifpb.pweb2.sorte_io.model.strategy.StrategyPagamento;
 import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.AuthorityRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.UserRepository;
@@ -78,9 +80,14 @@ public class ApostadorImpl implements ApostadorService {
         }
 
         Apostador apostador = apostadoresRepository.findByUser(username).get();
+        FactoryPagamento factory = new FactoryPagamento();
+
+        StrategyPagamento strategyPagamento = factory.strategyPagamento(radio);
+
+        BigDecimal saldoBonificado = strategyPagamento.adicionar(saldo);
 
         apostador.setSaldo(
-            apostador.getSaldo().add(saldo)
+            apostador.getSaldo().add(saldoBonificado)
         );
         
         apostadoresRepository.save(apostador);
