@@ -12,7 +12,7 @@ import br.edu.ifpb.pweb2.sorte_io.model.builder.BuilderUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+// import lombok.ToString;
 
 @Entity
 @Table(name = "users")

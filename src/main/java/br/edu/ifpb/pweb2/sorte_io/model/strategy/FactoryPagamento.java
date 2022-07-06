@@ -6,10 +6,10 @@ public class FactoryPagamento {
 
     public StrategyPagamento strategyPagamento(String tipoPagamento) {
 
-        if(tipoPagamento == "Paypal") {
+        if(tipoPagamento.equals("paypal")) {
             strategy = new PagarViaPaypal();
         }
-        else if(tipoPagamento == "Cartao") {
+        else if(tipoPagamento.equals("cartao")) {
             strategy = new PagarViaCartao();
         }
         else {

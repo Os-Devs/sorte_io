@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public class PagarViaPaypal implements StrategyPagamento {
 
     @Override
-    public BigDecimal pagar(BigDecimal valor) {
-        return valor.multiply(new BigDecimal(0.1));
+    public BigDecimal adicionar(BigDecimal valor) {
+        return valor.add(valor.multiply(new BigDecimal(0.1)));
     }
 
 }

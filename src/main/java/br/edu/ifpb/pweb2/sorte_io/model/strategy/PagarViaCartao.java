@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class PagarViaCartao implements StrategyPagamento {
 
     @Override
-    public BigDecimal pagar(BigDecimal valor) {
-        return valor.multiply(new BigDecimal(0.05));
+    public BigDecimal adicionar(BigDecimal valor) {
+        return valor.add(valor.multiply(new BigDecimal(0.05)));
     }
 }
