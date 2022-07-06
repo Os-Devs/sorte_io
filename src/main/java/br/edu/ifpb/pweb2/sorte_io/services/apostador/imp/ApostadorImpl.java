@@ -19,6 +19,8 @@ import br.edu.ifpb.pweb2.sorte_io.repository.ApostadoresRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.AuthorityRepository;
 import br.edu.ifpb.pweb2.sorte_io.repository.UserRepository;
 import br.edu.ifpb.pweb2.sorte_io.services.apostador.ApostadorService;
+import br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.command.CreateUser;
+import br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.command.CreateUserHandler;
 
 @Service
 public class ApostadorImpl implements ApostadorService {
@@ -41,7 +43,7 @@ public class ApostadorImpl implements ApostadorService {
     @Transactional
     public void saveApostador(Apostador apostador, String username, String senha) {
         User user = this.createUser(apostador, username, senha);
-        this.createAuthority(user);
+        this.createAuthority(apostador, username, senha);
 
         apostador.setUser(user);
 
@@ -49,28 +51,17 @@ public class ApostadorImpl implements ApostadorService {
     }
 
     private User createUser(Apostador apostador, String username, String senha) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        User user = new User();
+        CreateUserHandler handler = new CreateUserHandler(apostador, username, senha);
+        CreateUser create = new CreateUser();
 
-        user.setUsername(username)
-                .setPassword(encoder.encode(senha))
-                    .setEnabled(true);
-
-        return userRepository.save(user);
+        return userRepository.save(create.createUser(handler));
     }
 
-    private Authority createAuthority(User user) {
-        AuthorityId authorityId = new AuthorityId();
-        Authority authority = new Authority();
+    private Authority createAuthority(Apostador apostador, String username, String senha) {
+        CreateUserHandler handler = new CreateUserHandler(apostador, username, senha);
+        CreateUser create = new CreateUser();
 
-        authorityId.setUsername(user.getUsername())
-                        .setAuthority(EnumRole.APOSTADOR.getValue());
-
-        authority.setId(authorityId)
-                    .setUsername(user)
-                        .setAuthority(EnumRole.APOSTADOR.getValue());
-
-        return authorityRepository.save(authority);
+        return authorityRepository.save(create.createAuthority(handler));
     }
 
     @Override
