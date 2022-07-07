@@ -97,7 +97,6 @@ public class ApostaImp implements ApostaService {
         }
     }
 
-    @Transactional
     private void attApostador(Apostador apostador, Set<String> values) {
         apostador.setSaldo(
             apostador.getSaldo().subtract(
@@ -108,7 +107,6 @@ public class ApostaImp implements ApostaService {
         this.apostadoresRepository.save(apostador);
     }
 
-    @Transactional
     private void attSorteio(Sorteio sorteio,Aposta aposta, Set<String> values) {
         sorteio.setValPremiacao(
             sorteio.getValPremiacao().add(

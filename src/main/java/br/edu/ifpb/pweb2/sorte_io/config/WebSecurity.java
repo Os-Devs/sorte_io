@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -44,13 +43,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
             .dataSource(dataSource)
-            .passwordEncoder(encoder)
-            /*.withUser(
-                User.builder().username("controlador").password(encoder.encode("controlador123")).roles("CONTROLLER").build()
-            )
-            .withUser(
-                User.builder().username("apostador").password(encoder.encode("apostador123")).roles("USER").build()
-            ) */;
+            .passwordEncoder(encoder);
     }
 
 }

@@ -63,6 +63,7 @@ public class ApostaController {
 		boolean valid = apostaService.createAposta(value, aposta, auth.getName());
 
 		if(valid) {
+			this.proxy.AttProxy();
 			model.setViewName("redirect:/apostas/aposta");
 			flash.addFlashAttribute("sucesso", "Aposta cadastrada!");
 		}
