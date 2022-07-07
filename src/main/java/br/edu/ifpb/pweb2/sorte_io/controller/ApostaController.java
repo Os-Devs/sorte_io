@@ -48,6 +48,7 @@ public class ApostaController {
 		model.addObject("defaultSorteio", new Sorteio());
 		model.addObject("apostasFavoritas", apostaService.findFavoritos(auth.getName()));
 		model.addObject("sorteiosAbertos", proxy.getAbertos());
+		model.addObject("apostador", apostadorService.findByUser(auth.getName()));
 		model.addObject("aposta", aposta);
 		model.setViewName("/apostas/cadastro");
 

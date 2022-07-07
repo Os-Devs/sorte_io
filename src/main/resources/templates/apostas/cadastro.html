@@ -25,6 +25,13 @@
 		</span>
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
+	<div class="text-end mt-3 mx-3">
+		<p class="fs-4 btn btn-outline-secondary checked py-3">
+			<a th:inline="text" class="nav-link disabled">
+				<i class="bi bi-wallet"> R$ [[${#numbers.formatDecimal(apostador.saldo, 0, 'POINT', 2, 'COMMA')}]]</i>
+			</a>
+		</p>
+	</div>
 	<div class="container mt-4 text-center">
 		
 		<form th:action="@{/apostas}" method="post" th:object="${aposta}">
