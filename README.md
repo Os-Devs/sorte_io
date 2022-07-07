@@ -1,5 +1,11 @@
 # Sorte.io
-> Bem vindo ao Sorte.io sua plataforma de apostas, entre com 
+## Link para apresentação no YT: 
+
+## [Apresentação Sorte.io - Programação para WEB 2](https://youtu.be/lTN95W7xrxc)
+
+---
+
+> Bem vindo ao Sorte.io, sua plataforma de apostas! Entre com 
   com permissões diferentes e navegue no nosso sistema enquanto 
   ainda dispor de 2 coisas essenciais... 
   Sorte e Dinheiro ;)
