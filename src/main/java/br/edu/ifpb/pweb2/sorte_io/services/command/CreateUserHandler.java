@@ -1,4 +1,4 @@
-package br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.command;
+package br.edu.ifpb.pweb2.sorte_io.services.command;
 
 import br.edu.ifpb.pweb2.sorte_io.model.Usuario;
 import lombok.Getter;
