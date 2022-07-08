@@ -26,9 +26,6 @@ public class SorteioController {
 	@Autowired
 	SorteioImp sorteioService;
 
-	@Autowired
-	ProxySorteio proxy;
-
 	@RequestMapping("/sorteio")
 	public ModelAndView sorteio(ModelAndView model, Principal auth) {
 		model.addObject("meusSorteios", sorteioService.sorteiosForUser(auth.getName()));
@@ -56,7 +53,7 @@ public class SorteioController {
 			boolean valid = this.sorteioService.createSorteio(sorteio, auth.getName());
 
 			if(valid) {
-				this.proxy.AttProxy();
+				ProxySorteio.getInstance(this.sorteioService).AttProxy();
 				model.setViewName("redirect:/sorteios/sorteio");
 				flash.addFlashAttribute("sucesso", "Sorteio cadastrado com sucesso!");
 			}
@@ -87,7 +84,7 @@ public class SorteioController {
 		boolean valid = sorteioService.realizarSorteio(id, value);
 
 		if(valid) {
-			this.proxy.AttProxy();
+			ProxySorteio.getInstance(this.sorteioService).AttProxy();
 			model.setViewName("redirect:/sorteios/sorteio");
 			flash.addFlashAttribute("sucesso", "Sorteio realizado com sucesso!");
 		}

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifpb.pweb2.sorte_io.services.aposta.imp.ApostaImp;
 import br.edu.ifpb.pweb2.sorte_io.services.apostador.imp.ApostadorImpl;
 import br.edu.ifpb.pweb2.sorte_io.services.proxy.ProxySorteio;
+import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 import br.edu.ifpb.pweb2.sorte_io.model.Aposta;
 import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
 
@@ -28,7 +29,7 @@ public class ApostaController {
 	ApostaImp apostaService;
 
 	@Autowired
-	ProxySorteio proxy;
+	SorteioImp sorteioImp;
 
 	@Autowired
 	ApostadorImpl apostadorService;
@@ -47,7 +48,7 @@ public class ApostaController {
 		model.addObject("defaultAposta", new Aposta());
 		model.addObject("defaultSorteio", new Sorteio());
 		model.addObject("apostasFavoritas", apostaService.findFavoritos(auth.getName()));
-		model.addObject("sorteiosAbertos", proxy.getAbertos());
+		model.addObject("sorteiosAbertos", ProxySorteio.getInstance(this.sorteioImp).getAbertos());
 		model.addObject("apostador", apostadorService.findByUser(auth.getName()));
 		model.addObject("aposta", aposta);
 		model.setViewName("/apostas/cadastro");
@@ -64,7 +65,7 @@ public class ApostaController {
 		boolean valid = apostaService.createAposta(value, aposta, auth.getName());
 
 		if(valid) {
-			this.proxy.AttProxy();
+			ProxySorteio.getInstance(this.sorteioImp).AttProxy();
 			model.setViewName("redirect:/apostas/aposta");
 			flash.addFlashAttribute("sucesso", "Aposta cadastrada!");
 		}
