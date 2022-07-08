@@ -13,15 +13,12 @@ public class HomeController {
 
 	@Autowired
 	SorteioImp sorteioService;
-
-	@Autowired
-	ProxySorteio proxy;
 	
 	@RequestMapping("/home")
 	public ModelAndView home(ModelAndView model) {
 
-		model.addObject("sorteiosAbertos", proxy.getAbertos());
-		model.addObject("sorteiosFechados", proxy.getFechados());
+		model.addObject("sorteiosAbertos", ProxySorteio.getInstance(this.sorteioService).getAbertos());
+		model.addObject("sorteiosFechados", ProxySorteio.getInstance(this.sorteioService).getFechados());
 		
 		model.setViewName("/home");
         return model;

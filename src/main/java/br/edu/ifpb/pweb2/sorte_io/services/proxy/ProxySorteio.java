@@ -11,14 +11,26 @@ import br.edu.ifpb.pweb2.sorte_io.model.Sorteio;
 import br.edu.ifpb.pweb2.sorte_io.services.sorteio.imp.SorteioImp;
 
 @Service
-@Scope("singleton")
-public class ProxySorteio {
+// @Scope("singleton")
+public final class ProxySorteio {
     
-    @Autowired
+    private static ProxySorteio instance;
     private SorteioImp sorteioService;
+
+    private ProxySorteio(SorteioImp sorteioImp) {
+        this.sorteioService = sorteioImp;
+    }
 
     private List<Sorteio> sorteiosAbertos = new ArrayList<>();
     private List<Sorteio> sorteiosFechados = new ArrayList<>();
+
+    public static ProxySorteio getInstance(SorteioImp sorteioImp) {
+        if(instance == null) {
+            instance = new ProxySorteio(sorteioImp);
+        }
+
+        return instance;
+    }
 
     public List<Sorteio> getAbertos() {
         if(this.sorteiosAbertos.isEmpty()) {
